@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onSubmit" class="space-y-4">
+  <!-- <form @submit.prevent="onSubmit" class="space-y-4">
     <Textinput
       label="Email"
       type="email"
@@ -41,73 +41,70 @@
     </div>
 
     <button type="submit" class="btn btn-dark block w-full text-center">Sign in</button>
+  </form> -->
+  <form action="">
+    <Textinput
+      label="Email"
+      type="email"
+      placeholder="Enter your email"
+      name="email"
+      v-model="userInput.email"
+      classInput="h-[48px]"
+    />
+    <Textinput
+      label="Password"
+      type="password"
+      placeholder="Enter password"
+      name="password"
+      v-model="userInput.password"
+      hasicon
+      classInput="h-[48px]"
+      class="mb-7"
+    />
+    <button
+      @click="signInToFirebase"
+      type="button"
+      class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1"
+    >
+      Sign In
+    </button>
+    <div class="mt-2">
+      <router-link to="/forgot-password" class="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium">
+        Forgot Password?
+      </router-link>
+    </div>
   </form>
 </template>
-<script>
-import Textinput from '@/components/Textinput';
-import { useField, useForm } from 'vee-validate';
-import * as yup from 'yup';
+<script setup>
+import { ref } from 'vue';
+import { useFirebaseAuth } from 'vuefire';
+import { signInWithEmailAndPassword } from '@firebase/auth';
 import { useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
-export default {
-  components: {
-    Textinput,
-  },
-  data() {
-    return {
-      checkbox: false,
-    };
-  },
-  setup() {
-    // Define a validation schema
-    const schema = yup.object({
-      email: yup.string().required('Email is required').email(),
-      password: yup.string().required('Password is required').min(8),
+import Textinput from '@/components/Textinput';
+
+const toast = useToast();
+const router = useRouter();
+const auth = useFirebaseAuth();
+
+const userInput = ref({
+  email: '',
+  password: '',
+});
+
+async function signInToFirebase() {
+  signInWithEmailAndPassword(auth, userInput.value.email, userInput.value.password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      router.push('/app/home');
+      toast.success(' Login  successfully', {
+        timeout: 2000,
+      });
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
     });
-    const toast = useToast();
-    const router = useRouter();
-    const formValues = {
-      email: 'dashcode@gmail.com',
-      password: 'dashcode',
-    };
-    const { handleSubmit } = useForm({
-      validationSchema: schema,
-      initialValues: formValues,
-    });
-    // No need to define rules for fields
-    const { value: email, errorMessage: emailError } = useField('email');
-    const { value: password, errorMessage: passwordError } = useField('password');
-    const onSubmit = handleSubmit((values) => {
-      let isUser = localStorage.users;
-      isUser = JSON.parse(isUser);
-      let userIndex = isUser.findIndex((user) => user.email === values.email);
-      if (userIndex > -1) {
-        let activeUser = isUser.find((user) => user.email === values.email);
-        localStorage.setItem('activeUser', JSON.stringify(activeUser));
-        if (isUser[userIndex].password === values.password) {
-          router.push('/app/home');
-          toast.success(' Login  successfully', {
-            timeout: 2000,
-          });
-        } else {
-          toast.error(' Password not match ', {
-            timeout: 2000,
-          });
-        }
-      } else {
-        toast.error(' User not found', {
-          timeout: 2000,
-        });
-      }
-    });
-    return {
-      email,
-      emailError,
-      password,
-      passwordError,
-      onSubmit,
-    };
-  },
-};
+}
 </script>
-<style lang="scss"></style>

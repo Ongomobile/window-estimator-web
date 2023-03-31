@@ -17,7 +17,7 @@
             label="Email"
             type="email"
             placeholder="Enter your email"
-            name="emil"
+            name="email"
             v-model="userInput.email"
             classInput="h-[48px]"
           />

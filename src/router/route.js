@@ -29,6 +29,7 @@ const routes = [
     name: 'Layout',
     redirect: '/app/home',
     component: () => import('@/Layout/index.vue'),
+    meta: { isProtected: true },
     children: [
       {
         path: 'home',

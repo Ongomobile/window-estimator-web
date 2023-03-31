@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { getCurrentUser } from 'vuefire';
 
 import routes from './route';
 
@@ -14,6 +15,18 @@ const router = createRouter({
     }
   },
 });
+
+async function authGuard(to) {
+  // Ensures the user is initialized
+  const user = await getCurrentUser();
+  if (to.meta.isProtected && !user) {
+    // Redirect to a login page
+    return '/';
+  }
+}
+
+router.beforeEach(authGuard);
+
 router.beforeEach((to, from, next) => {
   const titleText = to.name;
   const words = titleText.split(' ');

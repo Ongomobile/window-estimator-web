@@ -38,39 +38,44 @@
     </template>
   </Dropdown>
 </template>
-<script>
+<script setup>
 import { MenuItem } from '@headlessui/vue';
 import Dropdown from '@/components/Dropdown';
 import Icon from '@/components/Icon';
 import profileImg from '@/assets/images/all-img/user.png';
-export default {
-  components: {
-    Icon,
-    Dropdown,
-    MenuItem,
+import { useCurrentUser, useFirebaseAuth } from 'vuefire';
+import { signOut } from '@firebase/auth';
+import { useRouter } from 'vue-router';
+
+const user = useCurrentUser();
+const auth = useFirebaseAuth();
+const router = useRouter();
+
+async function signOutOfFirebase() {
+  signOut(auth)
+    .then(() => {
+      console.log('Logged out!');
+      router.push('/');
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+const ProfileMenu = [
+  {
+    label: 'Profile',
+    icon: 'heroicons-outline:user',
+    link: () => {
+      router.push('profile');
+    },
   },
-  data() {
-    return {
-      profileImg,
-      ProfileMenu: [
-        {
-          label: 'Profile',
-          icon: 'heroicons-outline:user',
-          link: () => {
-            this.$router.push('profile');
-          },
-        },
-        {
-          label: 'Logout',
-          icon: 'heroicons-outline:login',
-          link: () => {
-            this.$router.push('/');
-            localStorage.removeItem('activeUser');
-          },
-        },
-      ],
-    };
+  {
+    label: 'Logout',
+    icon: 'heroicons-outline:login',
+    link: () => {
+      signOutOfFirebase();
+    },
   },
-};
+];
 </script>
-<style lang=""></style>

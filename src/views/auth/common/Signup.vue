@@ -5,36 +5,32 @@
       <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
         <h1 class="mb-8 text-3xl text-center">Sign up</h1>
         <form action="">
-          <input
+          <Textinput
+            label="Full name"
             type="text"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
-            name="fullname"
-            placeholder="Full Name"
+            placeholder="Enter full name"
+            name="name"
             v-model="userInput.name"
+            classInput="h-[48px]"
           />
-
-          <input
-            type="text"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
-            name="email"
-            placeholder="Email"
+          <Textinput
+            label="Email"
+            type="email"
+            placeholder="Enter your email"
+            name="emil"
             v-model="userInput.email"
+            classInput="h-[48px]"
           />
-
-          <input
+          <Textinput
+            label="Password"
             type="password"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
+            placeholder="Enter password"
             name="password"
-            placeholder="Password"
             v-model="userInput.password"
+            hasicon
+            classInput="h-[48px]"
+            class="mb-7"
           />
-          <!-- <input
-            type="password"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
-            name="confirm_password"
-            placeholder="Confirm Password"
-          /> -->
-
           <button
             @click="createUser"
             type="button"
@@ -53,7 +49,7 @@
 
       <div class="text-grey-dark mt-6">
         Already have an account?
-        <a class="no-underline border-b border-blue text-blue" href="../login/"> Log in </a>.
+        <router-link to="/" class="text-slate-900 dark:text-white font-medium hover:underline"> Sign In</router-link>
       </div>
     </div>
   </div>
@@ -62,8 +58,13 @@
 import { ref } from 'vue';
 import { useFirebaseAuth } from 'vuefire';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
+import { useFirestore } from 'vuefire';
+import { collection, addDoc } from 'firebase/firestore';
 import { useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
+import Textinput from '@/components/Textinput';
+
+const db = useFirestore();
 
 const userInput = ref({
   name: '',
@@ -77,18 +78,13 @@ const toast = useToast();
 const router = useRouter();
 
 async function createUser() {
-  console.log('CreateUser Called', userInput.value.email, userInput.value.password);
   createUserWithEmailAndPassword(auth, userInput.value.email, userInput.value.password)
     .then((userCredential) => {
-      // Signed in
       const user = userCredential.user;
-      console.log(user);
-      router.push('/');
+      addUser();
       toast.success(' Account Create successfully', {
         timeout: 2000,
       });
-
-      // ...
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -96,73 +92,22 @@ async function createUser() {
       console.log('In Catch', errorMessage);
     });
 }
+
+// Add a new document with a generated id.
+async function addUser() {
+  const newUser = {
+    name: userInput.value.name,
+    email: userInput.value.email,
+    counters: [],
+    estimates: [],
+    customers: [],
+  };
+  const newDoc = await addDoc(collection(db, 'users'), {
+    ...newUser,
+  });
+
+  if (newDoc.id) {
+    router.push('/');
+  }
+}
 </script>
-<!-- <script>
-import Textinput from '@/components/Textinput';
-import { useField, useForm } from 'vee-validate';
-import * as yup from 'yup';
-import { inject } from 'vue';
-import { useRouter } from 'vue-router';
-import { useToast } from 'vue-toastification';
-export default {
-  components: {
-    Textinput,
-  },
-  data() {
-    return {
-      checkbox: false,
-    };
-  },
-  setup() {
-    // Define a validation schema
-    const schema = yup.object({
-      email: yup.string().required(' Email is required').email(),
-      password: yup.string().required('Password is  required').min(8),
-      name: yup.string().required('Full name is required'),
-    });
-    const swal = inject('$swal');
-    const toast = useToast();
-    const router = useRouter();
-    // Create a form context with the validation schema
-    // const users = [];
-    const { handleSubmit } = useForm({
-      validationSchema: schema,
-    });
-    // No need to define rules for fields
-    const { value: email, errorMessage: emailError } = useField('email');
-    const { value: name, errorMessage: nameError } = useField('name');
-    const { value: password, errorMessage: passwordError } = useField('password');
-    const onSubmit = handleSubmit((values) => {
-      // add value into user array if same email not found
-      // if (!users.find((user) => user.email === values.email)) {
-      //   users.push(values);
-      //   localStorage.setItem('users', JSON.stringify(users));
-      //   router.push('/');
-      //   // use vue-toast-notification app use
-      //   toast.success -
-      //     500(' Account Create successfully', {
-      //       timeout: 2000,
-      //     });
-      // } else {
-      //   // use sweetalert 2
-      //   swal.fire({
-      //     title: 'Email already exists',
-      //     text: 'Please try another email',
-      //     icon: 'error',
-      //     confirmButtonText: 'Ok',
-      //   });
-      // }
-    });
-    return {
-      email,
-      name,
-      nameError,
-      emailError,
-      password,
-      passwordError,
-      onSubmit,
-    };
-  },
-};
-</script> -->
-<style lang="scss"></style>

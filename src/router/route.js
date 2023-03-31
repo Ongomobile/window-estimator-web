@@ -1,5 +1,3 @@
-import auth from '@/middleware/auth';
-import guest from '@/middleware/guest';
 const routes = [
   {
     path: '/',
@@ -31,9 +29,6 @@ const routes = [
     name: 'Layout',
     redirect: '/app/home',
     component: () => import('@/Layout/index.vue'),
-    meta: {
-      middleware: [auth],
-    },
     children: [
       {
         path: 'home',

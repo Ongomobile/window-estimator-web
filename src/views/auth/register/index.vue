@@ -29,26 +29,8 @@
               <router-link to="/"><img src="@/assets/images/logo/logo.svg" alt="" class="mx-auto" /></router-link>
             </div>
             <Signup />
-            <div className=" relative border-b-[#9AA2AF] border-opacity-[16%] border-b pt-6">
-              <div
-                className=" absolute inline-block  bg-white dark:bg-slate-800 left-1/2 top-1/2 transform -translate-x-1/2 px-4 min-w-max text-sm  text-slate-500  dark:text-slate-400font-normal "
-              >
-                Or continue with
-              </div>
-            </div>
-            <div class="max-w-[242px] mx-auto mt-8 w-full">
-              <Social />
-            </div>
-            <div
-              class="max-w-[215px] mx-auto font-normal text-slate-500 dark:text-slate-400 2xl:mt-12 mt-6 uppercase text-sm"
-            >
-              Already registered?
-              <router-link to="/" class="text-slate-900 dark:text-white font-medium hover:underline">
-                Sign In</router-link
-              >
-            </div>
           </div>
-          <div class="auth-footer text-center">Copyright 2021, Dashcode All Rights Reserved.</div>
+          <div class="auth-footer text-center">Copyright 2023, All Rights Reserved.</div>
         </div>
       </div>
     </div>
@@ -56,11 +38,9 @@
 </template>
 <script>
 import Signup from '../common/Signup';
-import Social from '../common/Social';
 
 export default {
   components: {
-    Social,
     Signup,
   },
 };

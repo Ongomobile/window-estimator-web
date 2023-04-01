@@ -1,79 +1,56 @@
 <template>
-  <!-- <form @submit.prevent="onSubmit" class="space-y-4">
-    <Textinput
-      label="Email"
-      type="email"
-      placeholder="Type your email"
-      name="emil"
-      v-model="email"
-      :error="emailError"
-      classInput="h-[48px]"
-    />
-    <Textinput
-      label="Password"
-      type="password"
-      placeholder="8+ characters, 1 capitat letter "
-      name="password"
-      v-model="password"
-      :error="passwordError"
-      hasicon
-      classInput="h-[48px]"
-    />
+  <div class="bg-grey-lighter min-h-screen flex flex-col">
+    <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+        <h1 class="mb-8 text-3xl text-center">Sign In</h1>
 
-    <div class="flex justify-between">
-      <label class="cursor-pointer flex items-start">
-        <input type="checkbox" class="hidden" @change="() => (checkbox = !checkbox)" />
-        <span
-          class="h-4 w-4 border rounded flex-none inline-flex mr-3 relative top-1 transition-all duration-150"
-          :class="
-            checkbox
-              ? 'ring-2 ring-black-500 dark:ring-offset-slate-600 dark:ring-slate-900  dark:bg-slate-900 ring-offset-2 bg-slate-900'
-              : 'bg-slate-100 dark:bg-slate-600 border-slate-100 dark:border-slate-600 '
-          "
+        <form action="">
+          <Textinput
+            label="Email"
+            type="email"
+            placeholder="Enter your email"
+            name="email"
+            v-model="userInput.email"
+            classInput="h-[48px]"
+          />
+          <Textinput
+            label="Password"
+            type="password"
+            placeholder="Enter password"
+            name="password"
+            v-model="userInput.password"
+            hasicon
+            classInput="h-[48px]"
+            class="mb-7"
+          />
+          <button
+            @click="signInToFirebase"
+            type="button"
+            class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1"
+          >
+            Sign In
+          </button>
+          <div class="mt-2">
+            <router-link to="/forgot-password" class="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium">
+              Forgot Password?
+            </router-link>
+          </div>
+        </form>
+        <div class="text-center text-sm text-grey-dark mt-4">
+          By signing up, you agree to the
+          <a class="no-underline border-b border-grey-dark text-grey-dark" href="#"> Terms of Service </a> and
+          <a class="no-underline border-b border-grey-dark text-grey-dark" href="#"> Privacy Policy </a>
+        </div>
+      </div>
+
+      <div class="text-grey-dark mt-6">
+        Already have an account?
+        <router-link to="/register" class="text-slate-900 dark:text-white font-medium hover:underline">
+          Sign Up</router-link
         >
-          <img src="@/assets/images/icon/ck-white.svg" alt="" class="h-[10px] w-[10px] block m-auto" v-if="checkbox" />
-        </span>
-        <span class="text-slate-500 dark:text-slate-400 text-sm leading-6">Keep me signed in</span>
-      </label>
-      <router-link to="/forgot-password" class="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium"
-        >Forgot Password?</router-link
-      >
+      </div>
     </div>
-
-    <button type="submit" class="btn btn-dark block w-full text-center">Sign in</button>
-  </form> -->
-  <form action="">
-    <Textinput
-      label="Email"
-      type="email"
-      placeholder="Enter your email"
-      name="email"
-      v-model="userInput.email"
-      classInput="h-[48px]"
-    />
-    <Textinput
-      label="Password"
-      type="password"
-      placeholder="Enter password"
-      name="password"
-      v-model="userInput.password"
-      hasicon
-      classInput="h-[48px]"
-      class="mb-7"
-    />
-    <button
-      @click="signInToFirebase"
-      type="button"
-      class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1"
-    >
-      Sign In
-    </button>
-    <div class="mt-2">
-      <router-link to="/forgot-password" class="text-sm text-slate-800 dark:text-slate-400 leading-6 font-medium">
-        Forgot Password?
-      </router-link>
-    </div>
-  </form>
+  </div>
 </template>
 <script setup>
 import { ref } from 'vue';

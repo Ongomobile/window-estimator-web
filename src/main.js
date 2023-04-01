@@ -12,7 +12,6 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import VueTippy from 'vue-tippy';
 import Toast from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
-import VueApexCharts from 'vue3-apexcharts';
 import VueClickAway from 'vue3-click-away';
 import App from './App.vue';
 import './assets/scss/auth.scss';
@@ -42,7 +41,6 @@ const app = createApp(App)
   .use(VueTippy)
   .use(VueFlatPickr)
   .use(VueGoodTablePlugin)
-  .use(VueApexCharts)
   .use(VCalendar);
 
 app.config.globalProperties.$store = {};

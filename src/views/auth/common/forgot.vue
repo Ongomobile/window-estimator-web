@@ -1,55 +1,42 @@
 <template>
-  <form @submit.prevent="onSubmit" class="space-y-4">
+  <form class="space-y-4">
     <Textinput
       label="Email"
       type="email"
       placeholder="Type your email"
       name="email"
-      v-model="email"
-      :error="emailError"
+      v-model="userEmail.email"
       classInput="h-[48px]"
     />
 
-    <button type="submit" class="btn btn-dark block w-full text-center">Send recovery email</button>
+    <button @click="resetPassword" type="" class="btn btn-dark block w-full text-center">Send recovery email</button>
   </form>
 </template>
-<script>
+<script setup>
+import { ref } from 'vue';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import { useRouter } from 'vue-router';
+import { useToast } from 'vue-toastification';
 import Textinput from '@/components/Textinput';
-import { useField, useForm } from 'vee-validate';
-import * as yup from 'yup';
+const toast = useToast();
+const router = useRouter();
+const auth = getAuth();
+const userEmail = ref({ email: '' });
 
-export default {
-  components: {
-    Textinput,
-  },
-  data() {
-    return {
-      checkbox: false,
-    };
-  },
-  setup() {
-    // Define a validation schema
-    const schema = yup.object({
-      email: yup.string().required().email(),
+async function resetPassword() {
+  console.log(userEmail.value.email);
+  sendPasswordResetEmail(auth, userEmail.value.email)
+    .then(() => {
+      //
+      router.push('/');
+      toast.success('Password reset email sent!', {
+        timeout: 2000,
+      });
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage);
     });
-
-    const { handleSubmit } = useForm({
-      validationSchema: schema,
-    });
-    // No need to define rules for fields
-
-    const { value: email, errorMessage: emailError } = useField('email');
-
-    const onSubmit = handleSubmit(() => {
-      // console.warn(values);
-    });
-
-    return {
-      email,
-      emailError,
-      onSubmit,
-    };
-  },
-};
+}
 </script>
-<style lang="scss"></style>

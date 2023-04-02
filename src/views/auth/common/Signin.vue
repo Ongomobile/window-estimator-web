@@ -54,7 +54,7 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import { useFirebaseAuth } from 'vuefire';
+import { useFirebaseAuth, useAppCheckToken } from 'vuefire';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 import { useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
@@ -70,6 +70,7 @@ const userInput = ref({
 });
 
 async function signInToFirebase() {
+  useAppCheckToken('6Ldyn1ElAAAAAOnVO8L6xmKBIlaRREW137F0iCpW');
   signInWithEmailAndPassword(auth, userInput.value.email, userInput.value.password)
     .then((userCredential) => {
       // Signed in

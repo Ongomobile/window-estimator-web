@@ -30,7 +30,6 @@ const app = createApp(App)
     firebaseApp,
     modules: [VueFireAuth(), VueFireAppCheck()],
   })
-  .useAppCheck('6Ldyn1ElAAAAAOnVO8L6xmKBIlaRREW137F0iCpW')
   .use(pinia)
   .use(VueSweetalert2)
   .use(Toast, {

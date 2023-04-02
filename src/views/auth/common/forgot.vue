@@ -9,7 +9,9 @@
       classInput="h-[48px]"
     />
 
-    <button @click="resetPassword" type="" class="btn btn-dark block w-full text-center">Send recovery email</button>
+    <button @click.prevent="resetPassword" type="" class="btn btn-dark block w-full text-center">
+      Send recovery email
+    </button>
   </form>
 </template>
 <script setup>
@@ -24,7 +26,6 @@ const auth = getAuth();
 const userEmail = ref({ email: '' });
 
 async function resetPassword() {
-  console.log(userEmail.value.email);
   sendPasswordResetEmail(auth, userEmail.value.email)
     .then(() => {
       //

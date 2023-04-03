@@ -28,7 +28,7 @@ const app = createApp(App)
   .use(VueFire, {
     // imported above but could also just be created here
     firebaseApp,
-    modules: [VueFireAuth(), VueFireAppCheck()],
+    modules: [VueFireAuth(), VueFireAppCheck('6Ldyn1ElAAAAAOnVO8L6xmKBIlaRREW137F0iCpW')],
   })
   .use(pinia)
   .use(VueSweetalert2)

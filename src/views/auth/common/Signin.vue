@@ -70,7 +70,7 @@ const userInput = ref({
 });
 
 async function signInToFirebase() {
-  useAppCheck('6Ldyn1ElAAAAAOnVO8L6xmKBIlaRREW137F0iCpW');
+  useAppCheck(import.meta.env.VITE_VUEFIRE_SITE_KEY);
   // useAppCheckToken('6Ldyn1ElAAAAAOnVO8L6xmKBIlaRREW137F0iCpW');
   signInWithEmailAndPassword(auth, userInput.value.email, userInput.value.password)
     .then((userCredential) => {

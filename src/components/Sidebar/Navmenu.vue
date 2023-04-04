@@ -13,14 +13,8 @@
     >
       <!-- ?? single menu with no childred !!  -->
 
-      <router-link
-        :to="`${item.link}`"
-        class="menu-link"
-        v-if="!item.child && !item.isHeadr"
-      >
-        <span class="menu-icon" v-if="item.icon">
-          <Icon :icon="item.icon"
-        /></span>
+      <router-link :to="`${item.link}`" class="menu-link" v-if="!item.child && !item.isHeadr">
+        <span class="menu-icon" v-if="item.icon"> <Icon :icon="item.icon" /></span>
         <div class="text-box" v-if="item.title">{{ item.title }}</div>
       </router-link>
 
@@ -32,25 +26,17 @@
       <div
         class="menu-link"
         v-else
-        :class="
-          activeSubmenu === i ? 'parent_active not-collapsed' : 'collapsed'
-        "
+        :class="activeSubmenu === i ? 'parent_active not-collapsed' : 'collapsed'"
         @click="toggleSubmenu(i)"
       >
         <div class="flex-1 flex items-start">
-          <span class="menu-icon" v-show="item.icon">
-            <Icon :icon="item.icon"
-          /></span>
+          <span class="menu-icon" v-show="item.icon"> <Icon :icon="item.icon" /></span>
           <div class="text-box" v-if="item.title">{{ item.title }}</div>
         </div>
         <div class="flex-0">
           <div
             class="menu-arrow transform transition-all duration-300"
-            :class="
-              activeSubmenu === i
-                ? ' ltr:rotate-90 rtl:rotate-90'
-                : 'rtl:rotate-180'
-            "
+            :class="activeSubmenu === i ? ' ltr:rotate-90 rtl:rotate-90' : 'rtl:rotate-180'"
           >
             <Icon icon="heroicons-outline:chevron-right" />
           </div>
@@ -76,11 +62,7 @@
             <router-link :to="ci.childlink" v-slot="{ isActive }">
               <span
                 class="text-sm flex space-x-3 rtl:space-x-reverse items-center transition-all duration-150"
-                :class="
-                  isActive
-                    ? ' text-slate-900 dark:text-white font-medium'
-                    : 'text-slate-600 dark:text-slate-300'
-                "
+                :class="isActive ? ' text-slate-900 dark:text-white font-medium' : 'text-slate-600 dark:text-slate-300'"
               >
                 <span
                   class="h-2 w-2 rounded-full border border-slate-600 dark:border-slate-300 inline-block flex-none"
@@ -99,7 +81,7 @@
         </ul>
       </Transition>
     </li>
-    <li class="single-sidebar-menu">
+    <!-- <li class="single-sidebar-menu">
       <a
         href="https://dashcode-doc.codeshaper.tech/"
         target="_blank"
@@ -108,12 +90,12 @@
         <span class="menu-icon"><Icon icon="heroicons:document" /></span>
         <div class="text-box">Documentation</div>
       </a>
-    </li>
+    </li> -->
   </ul>
 </template>
 <script>
-import { useRouter } from "vue-router";
-import Icon from "../Icon";
+import { useRouter } from 'vue-router';
+import Icon from '../Icon';
 export default {
   components: {
     Icon,
@@ -128,15 +110,15 @@ export default {
   props: {
     title: {
       type: String,
-      default: "",
+      default: '',
     },
     icon: {
       type: String,
-      default: "",
+      default: '',
     },
     link: {
       type: String,
-      default: "",
+      default: '',
     },
     items: { type: Array, required: true },
     childrenLinks: { type: Array, default: null },
@@ -146,7 +128,7 @@ export default {
     beforeEnter(element) {
       requestAnimationFrame(() => {
         if (!element.style.height) {
-          element.style.height = "0px";
+          element.style.height = '0px';
         }
 
         element.style.display = null;
@@ -172,7 +154,7 @@ export default {
     leave(element) {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          element.style.height = "0px";
+          element.style.height = '0px';
         });
       });
     },

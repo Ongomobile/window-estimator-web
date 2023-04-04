@@ -40,6 +40,16 @@ const routes = [
         },
       },
       {
+        path: 'counters',
+        name: 'counters',
+        component: () => import('@/views/app/counters'),
+      },
+      {
+        path: 'calender',
+        name: 'calender',
+        component: () => import('@/views/app/calendar'),
+      },
+      {
         path: 'invoice',
         name: 'invoice',
         component: () => import('@/views/utility/invoice'),

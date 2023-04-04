@@ -13,6 +13,20 @@ export const menuItems = [
     icon: 'heroicons-outline:home',
     link: 'home',
   },
+  {
+    isHeadr: true,
+    title: 'apps',
+  },
+  {
+    title: 'Calender',
+    icon: 'heroicons-outline:calendar',
+    link: 'calender',
+  },
+  {
+    title: 'Counters',
+    icon: 'heroicons-outline:calculator',
+    link: 'counters',
+  },
 ];
 // menuseetins
 
@@ -52,68 +66,6 @@ export const notifications = [
   {
     title: 'Brooklyn Simmons',
     desc: 'Added you to Top Secret Project group...',
-    image: user4Img,
-    link: '#',
-  },
-];
-
-export const message = [
-  {
-    title: 'Wade Warren',
-    desc: 'Hi! How are you doing?.....',
-    active: true,
-    hasnotifaction: true,
-    notification_count: 1,
-    image: userImg,
-    link: '#',
-  },
-  {
-    title: 'Savannah Nguyen',
-    desc: 'Hi! How are you doing?.....',
-    active: false,
-    hasnotifaction: false,
-    image: user2Img,
-    link: '#',
-  },
-  {
-    title: 'Ralph Edwards',
-    desc: 'Hi! How are you doing?.....',
-    active: false,
-    hasnotifaction: true,
-    notification_count: 8,
-    image: user3Img,
-    link: '#',
-  },
-  {
-    title: 'Cody Fisher',
-    desc: 'Hi! How are you doing?.....',
-    active: true,
-    hasnotifaction: false,
-    image: user4Img,
-    link: '#',
-  },
-  {
-    title: 'Savannah Nguyen',
-    desc: 'Hi! How are you doing?.....',
-    active: false,
-    hasnotifaction: false,
-    image: user2Img,
-    link: '#',
-  },
-  {
-    title: 'Ralph Edwards',
-    desc: 'Hi! How are you doing?.....',
-    active: false,
-    hasnotifaction: true,
-    notification_count: 8,
-    image: user3Img,
-    link: '#',
-  },
-  {
-    title: 'Cody Fisher',
-    desc: 'Hi! How are you doing?.....',
-    active: true,
-    hasnotifaction: false,
     image: user4Img,
     link: '#',
   },

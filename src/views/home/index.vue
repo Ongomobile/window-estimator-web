@@ -8,6 +8,6 @@ const db = useFirestore();
 // VueFire abstraction
 const usersCollection = useCollection(collection(db, 'users'));
 
-// console.log({ usersCollection });
+console.log({ usersCollection });
 </script>
 <style lang=""></style>

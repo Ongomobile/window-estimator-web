@@ -56,10 +56,10 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import { useFirebaseAuth } from 'vuefire';
+import { useFirebaseAuth, useCurrentUser } from 'vuefire';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
 import { useFirestore } from 'vuefire';
-import { collection, addDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
 import Textinput from '@/components/Textinput';
@@ -95,6 +95,10 @@ async function createUser() {
 
 // Add a new document with a generated id.
 async function addUser() {
+  const user = useCurrentUser();
+  const userId = user.value.uid;
+  const userRef = doc(db, 'users', userId);
+
   const newUser = {
     name: userInput.value.name,
     email: userInput.value.email,
@@ -102,7 +106,7 @@ async function addUser() {
     estimates: [],
     customers: [],
   };
-  const newDoc = await addDoc(collection(db, 'users'), {
+  const newDoc = await setDoc(userRef, {
     ...newUser,
   });
 

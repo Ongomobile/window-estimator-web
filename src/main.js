@@ -1,5 +1,5 @@
 import { VueFire, VueFireAuth } from 'vuefire';
-import { firebaseApp } from '@/firebase.js';
+import { firebaseApp, appCheck } from '@/firebase.js';
 import 'animate.css';
 import 'flatpickr/dist/flatpickr.css';
 import 'simplebar/dist/simplebar.min.css';
@@ -30,6 +30,7 @@ const app = createApp(App)
     firebaseApp,
     modules: [VueFireAuth()],
   })
+  .use(appCheck)
   .use(pinia)
   .use(VueSweetalert2)
   .use(Toast, {

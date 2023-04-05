@@ -10,7 +10,8 @@
             type="email"
             placeholder="Enter your email"
             name="email"
-            v-model="userInput.email"
+            v-model="email"
+            :error="emailError"
             classInput="h-[48px]"
           />
           <Textinput
@@ -18,7 +19,8 @@
             type="password"
             placeholder="Enter password"
             name="password"
-            v-model="userInput.password"
+            v-model="password"
+            :error="passwordError"
             hasicon
             classInput="h-[48px]"
             class="mb-7"
@@ -53,9 +55,10 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue';
 import { useFirebaseAuth } from 'vuefire';
 import { signInWithEmailAndPassword } from '@firebase/auth';
+import { useField, useForm } from 'vee-validate';
+import * as yup from 'yup';
 import { useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
 import Textinput from '@/components/Textinput';
@@ -64,13 +67,21 @@ const toast = useToast();
 const router = useRouter();
 const auth = useFirebaseAuth();
 
-const userInput = ref({
-  email: '',
-  password: '',
+const schema = yup.object({
+  email: yup.string().required('Email is required').email(),
+  password: yup.string().required('Password is required').min(8),
 });
 
-async function signInToFirebase() {
-  signInWithEmailAndPassword(auth, userInput.value.email, userInput.value.password)
+const { handleSubmit } = useForm({
+  validationSchema: schema,
+});
+
+const { value: email, errorMessage: emailError } = useField('email');
+
+const { value: password, errorMessage: passwordError } = useField('password');
+
+const signInToFirebase = handleSubmit((values) => {
+  signInWithEmailAndPassword(auth, values.email, values.password)
     .then((userCredential) => {
       // Signed in
 
@@ -83,6 +94,25 @@ async function signInToFirebase() {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+
+      switch (error.code) {
+        case 'auth/wrong-password':
+          toast.error('Incorrect Password', {
+            timeout: 2000,
+          });
+          break;
+        case 'auth/user-not-found':
+          toast.error('No user found with that email', {
+            timeout: 2000,
+          });
+          break;
+        default:
+          toast.error('Sorry, there was an unexpected error', {
+            timeout: 2000,
+          });
+      }
+
+      console.log(errorCode, errorMessage);
     });
-}
+});
 </script>

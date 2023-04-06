@@ -26,8 +26,8 @@
             class="mb-7"
           />
           <button
-            @click="signInToFirebase"
-            type="button"
+            @click.prevent="signInToFirebase"
+            type="submit"
             class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1"
           >
             Sign In

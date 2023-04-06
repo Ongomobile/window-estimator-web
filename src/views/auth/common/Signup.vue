@@ -127,20 +127,24 @@ async function createEmailUser(values) {
 
 // Add a new document with a generated id.
 async function addUser(email, name) {
-  const user = useCurrentUser();
-  const userId = user.value.uid;
-  const userRef = doc(db, 'users', userId);
+  try {
+    const user = useCurrentUser();
+    const userId = user.value.uid;
+    const userRef = doc(db, 'users', userId);
 
-  const newUser = {
-    name: name,
-    email: email,
-    counters: [],
-    estimates: [],
-    customers: [],
-  };
+    const newUser = {
+      name: name,
+      email: email,
+      counters: [],
+      estimates: [],
+      customers: [],
+    };
 
-  const newDoc = await setDoc(userRef, {
-    ...newUser,
-  });
+    const newDoc = await setDoc(userRef, {
+      ...newUser,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 </script>

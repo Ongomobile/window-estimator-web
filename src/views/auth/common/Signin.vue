@@ -87,7 +87,7 @@ const signInToFirebase = handleSubmit((values) => {
 
       const user = userCredential.user;
       router.push('/app/home');
-      toast.success(' Login  successfully', {
+      toast.success(' Login  successfull', {
         timeout: 2000,
       });
     })

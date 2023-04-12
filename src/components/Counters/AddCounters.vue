@@ -43,11 +43,11 @@
     </div>
   </div>
   <div class="counters-wrapper">
-    <ul class="counters-list">
-      <li class="counter-item" v-for="(counter, index) in counters" :key="index">
-        <Counter :counter="counter" @counter-to-delete="deleteSelectedCounter" />
-      </li>
-    </ul>
+    <draggable v-model="counters" :animation="200" :itemKey="id" class="counters-list">
+      <template #item="{ element }">
+        <Counter :counter="element" @counter-to-delete="deleteSelectedCounter" />
+      </template>
+    </draggable>
   </div>
 </template>
 
@@ -55,9 +55,11 @@
 import Counter from './Counter.vue';
 import SelectImage from './SelectImage.vue';
 import windowData from './windowData.json';
+import draggable from 'vuedraggable';
 export default {
   data() {
     return {
+      drag: false,
       counters: [],
       windowPrice: '',
       windowType: '',
@@ -74,6 +76,7 @@ export default {
   components: {
     Counter,
     SelectImage,
+    draggable,
   },
   mounted() {
     if (localStorage.getItem('counters')) {
@@ -205,9 +208,10 @@ export default {
 .counters-list {
   padding: 10px;
   display: flex;
+  flex-direction: column;
   list-style: none;
   overflow: auto;
-  overflow-x: scroll;
+  overflow-y: scroll;
 }
 .error-message {
   text-transform: capitalize;

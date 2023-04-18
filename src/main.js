@@ -4,7 +4,7 @@ import 'animate.css';
 import 'flatpickr/dist/flatpickr.css';
 import 'simplebar/dist/simplebar.min.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import { createApp } from 'vue';
+import { createApp, markRaw } from 'vue';
 import VueFlatPickr from 'vue-flatpickr-component';
 import VueGoodTablePlugin from 'vue-good-table-next';
 import 'vue-good-table-next/dist/vue-good-table-next.css';
@@ -22,6 +22,10 @@ import { createPinia } from 'pinia';
 import 'v-calendar/dist/style.css';
 
 const pinia = createPinia();
+
+pinia.use(({ store }) => {
+  store.router = markRaw(router);
+});
 
 // vue use
 const app = createApp(App)

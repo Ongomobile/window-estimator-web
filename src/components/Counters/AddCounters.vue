@@ -2,8 +2,16 @@
   <div class="add-counter-form--wrapper">
     <h2 class="add-counter-heading">Add A Counter</h2>
     <!-- prevent modifier prevents default -->
-    <form class="add-counter-form" @submit.prevent="addCounter">
-      <label for="type" class="add-counter-label" title="add">Window Type</label>
+    <form
+      class="add-counter-form"
+      @submit.prevent="addCounter"
+    >
+      <label
+        for="type"
+        class="add-counter-label"
+        title="add"
+        >Window Type</label
+      >
       <input
         type="text"
         id="type"
@@ -12,7 +20,11 @@
         placeholder="Add Window Type"
         v-model="windowType"
       />
-      <label for="location" class="add-counter-label">Window Location</label>
+      <label
+        for="location"
+        class="add-counter-label"
+        >Window Location</label
+      >
       <input
         type="text"
         id="location"
@@ -22,7 +34,11 @@
         v-model="windowLocation"
       />
 
-      <label for="price" class="add-counter-label">Window Price</label>
+      <label
+        for="price"
+        class="add-counter-label"
+        >Window Price</label
+      >
       <!-- Use .number modifier to cast input value as number -->
       <input
         type="text"
@@ -32,9 +48,20 @@
         v-model.number="windowPrice"
         placeholder="Add Window Price"
       />
-      <SelectImage :images="windowImages" @on-select-image="selectImage" />
-      <input type="submit" class="add-counter-input submit" value="Add Counter" :disabled="isDisabled" />
-      <div class="error-message-wrapper" v-if="validated">
+      <SelectImage
+        :images="windowImages"
+        @on-select-image="selectImage"
+      />
+      <input
+        type="submit"
+        class="add-counter-input submit"
+        value="Add Counter"
+        :disabled="isDisabled"
+      />
+      <div
+        class="error-message-wrapper"
+        v-if="validated"
+      >
         <p class="error-message">* type & price are required *</p>
       </div>
     </form>
@@ -43,9 +70,17 @@
     </div>
   </div>
   <div class="counters-wrapper">
-    <draggable v-model="counters" :animation="200" :itemKey="id" class="counters-list">
+    <draggable
+      v-model="counters"
+      :animation="200"
+      :itemKey="id"
+      class="counters-list"
+    >
       <template #item="{ element }">
-        <Counter :counter="element" @counter-to-delete="deleteSelectedCounter" />
+        <Counter
+          :counter="element"
+          @counter-to-delete="deleteSelectedCounter"
+        />
       </template>
     </draggable>
   </div>

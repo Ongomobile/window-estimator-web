@@ -11,6 +11,5 @@ const currentUser = useCurrentUser();
 const currentUserId = currentUser.value.uid;
 const usersArr = usersCollection.value;
 const currentUserData = usersArr.filter((user) => user.id === currentUserId);
-console.log(currentUserData[0]);
 </script>
 <style lang=""></style>

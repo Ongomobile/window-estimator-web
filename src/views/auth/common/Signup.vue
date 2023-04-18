@@ -44,32 +44,40 @@
 
         <div class="text-center text-sm text-grey-dark mt-4">
           By signing up, you agree to the
-          <a class="no-underline border-b border-grey-dark text-grey-dark" href="#"> Terms of Service </a> and
-          <a class="no-underline border-b border-grey-dark text-grey-dark" href="#"> Privacy Policy </a>
+          <a
+            class="no-underline border-b border-grey-dark text-grey-dark"
+            href="#"
+          >
+            Terms of Service
+          </a>
+          and
+          <a
+            class="no-underline border-b border-grey-dark text-grey-dark"
+            href="#"
+          >
+            Privacy Policy
+          </a>
         </div>
       </div>
 
       <div class="text-grey-dark mt-6">
         Already have an account?
-        <router-link to="/" class="text-slate-900 dark:text-white font-medium hover:underline"> Sign In</router-link>
+        <router-link
+          to="/"
+          class="text-slate-900 dark:text-white font-medium hover:underline"
+        >
+          Sign In</router-link
+        >
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import { ref } from 'vue';
-import { useFirebaseAuth, useCurrentUser } from 'vuefire';
-import { createUserWithEmailAndPassword } from '@firebase/auth';
-import { useFirestore } from 'vuefire';
-import { doc, setDoc } from 'firebase/firestore';
 import { useField, useForm } from 'vee-validate';
 import * as yup from 'yup';
-import { useRouter } from 'vue-router';
-import { useToast } from 'vue-toastification';
-import Textinput from '@/components/Textinput';
-import { async } from '@firebase/util';
 
-const db = useFirestore();
+import Textinput from '@/components/Textinput';
+import { useStoreAuth } from '@/store/storeAuth';
 
 const schema = yup.object({
   name: yup.string().required('Name is required'),
@@ -87,64 +95,9 @@ const { value: email, errorMessage: emailError } = useField('email');
 
 const { value: password, errorMessage: passwordError } = useField('password');
 
-const checkbox = ref(false);
-const auth = useFirebaseAuth();
-const toast = useToast();
-const router = useRouter();
+const storeAuth = useStoreAuth();
 
 const createUser = handleSubmit((values) => {
-  createEmailUser(values);
+  storeAuth.registerUser(values);
 });
-
-async function createEmailUser(values) {
-  createUserWithEmailAndPassword(auth, values.email, values.password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      addUser(values.email, values.name);
-      router.push('/');
-      toast.success(' Account Created successfully', {
-        timeout: 2000,
-      });
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log('In Catch', errorCode, errorMessage);
-
-      switch (error.code) {
-        case 'auth/email-already-in-use':
-          toast.error('There is already an account with this email', {
-            timeout: 2000,
-          });
-          break;
-        default:
-          toast.error('Sorry, there was an unexpected error', {
-            timeout: 2000,
-          });
-      }
-    });
-}
-
-// Add a new document with a generated id.
-async function addUser(email, name) {
-  try {
-    const user = useCurrentUser();
-    const userId = user.value.uid;
-    const userRef = doc(db, 'users', userId);
-
-    const newUser = {
-      name: name,
-      email: email,
-      counters: [],
-      estimates: [],
-      customers: [],
-    };
-
-    const newDoc = await setDoc(userRef, {
-      ...newUser,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
 </script>

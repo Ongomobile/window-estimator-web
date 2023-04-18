@@ -3,7 +3,11 @@
     <div class="flex items-center">
       <div class="flex-1 ltr:mr-[10px] rtl:ml-[10px]">
         <div class="lg:h-8 lg:w-8 h-7 w-7 rounded-full">
-          <img :src="profileImg" alt="" class="block w-full h-full object-cover rounded-full" />
+          <img
+            :src="profileImg"
+            alt=""
+            class="block w-full h-full object-cover rounded-full"
+          />
         </div>
       </div>
       <div
@@ -16,7 +20,11 @@
       </div>
     </div>
     <template #menus>
-      <MenuItem v-slot="{ active }" v-for="(item, i) in ProfileMenu" :key="i">
+      <MenuItem
+        v-slot="{ active }"
+        v-for="(item, i) in ProfileMenu"
+        :key="i"
+      >
         <div
           type="button"
           :class="`${
@@ -43,23 +51,12 @@ import { MenuItem } from '@headlessui/vue';
 import Dropdown from '@/components/Dropdown';
 import Icon from '@/components/Icon';
 import profileImg from '@/assets/images/all-img/user.png';
-import { useCurrentUser, useFirebaseAuth } from 'vuefire';
-import { signOut } from '@firebase/auth';
-import { useRouter } from 'vue-router';
+import { useStoreAuth } from '@/store/storeAuth';
 
-const user = useCurrentUser();
-const auth = useFirebaseAuth();
-const router = useRouter();
+const storeAuth = useStoreAuth();
 
 async function signOutOfFirebase() {
-  signOut(auth)
-    .then(() => {
-      console.log('Logged out!');
-      router.push('/');
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  storeAuth.logoutUser();
 }
 
 const ProfileMenu = [

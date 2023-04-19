@@ -14,7 +14,7 @@
 
 <script setup>
 import Button from '@/components/Button';
-import AddCounter from './addCounter.vue';
+import AddCounter from './addCounter';
 import { useStoreCounters } from '@/store/storeCounters';
 
 const storeCounters = useStoreCounters();

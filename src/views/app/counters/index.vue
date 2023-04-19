@@ -14,7 +14,7 @@
 
 <script setup>
 import Button from '@/components/Button';
-import AddCounter from '@views/app/counters/addCounter';
+import AddCounter from '@/components/counters/addCounter';
 import { useStoreCounters } from '@/store/storeCounters';
 
 const storeCounters = useStoreCounters();

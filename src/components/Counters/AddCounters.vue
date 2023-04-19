@@ -88,7 +88,7 @@
 
 <script>
 import Counter from './Counter.vue';
-import SelectImage from '../../views/app/counters/SelectImage.vue';
+import SelectImage from './SelectImage.vue';
 import windowData from './windowData.json';
 import draggable from 'vuedraggable';
 export default {

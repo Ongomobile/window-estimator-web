@@ -77,7 +77,7 @@
 import { ref, computed, reactive } from 'vue';
 import Modal from '@/components/Modal';
 import { useStoreCounters } from '@/store/storeCounters';
-import SelectImage from '@/views/app/counters/SelectImage.vue';
+import SelectImage from '@/components/Counters/SelectImage.vue';
 import windowData from './windowData';
 
 const storeCounters = useStoreCounters();

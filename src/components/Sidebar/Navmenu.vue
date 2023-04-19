@@ -127,7 +127,7 @@
   </ul>
   <div
     @click="logout"
-    class="mt-6 font-medium"
+    class="mt-6 font-medium cursor-pointer"
     :class="isActive ? ' text-slate-900 dark:text-white font-medium' : 'text-slate-600 dark:text-slate-300'"
   >
     Logout

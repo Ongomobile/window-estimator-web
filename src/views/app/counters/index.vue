@@ -5,14 +5,21 @@
         icon="heroicons-outline:plus"
         text="Add Counter"
         btnClass="btn-dark w-full block  "
-        @click=""
+        @click="openAddModal"
       />
     </div>
-    <!-- <AddCounters /> -->
+    <AddCounter />
   </div>
 </template>
 
 <script setup>
 import Button from '@/components/Button';
-import AddCounters from '@/components/Counters/AddCounters.vue';
+import AddCounter from './addCounter.vue';
+import { useStoreCounters } from '@/store/storeCounters';
+
+const storeCounters = useStoreCounters();
+
+const openAddModal = () => {
+  storeCounters.openCounterModal();
+};
 </script>

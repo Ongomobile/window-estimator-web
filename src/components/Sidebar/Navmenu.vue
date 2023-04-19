@@ -13,13 +13,30 @@
     >
       <!-- ?? single menu with no childred !!  -->
 
-      <router-link :to="`${item.link}`" class="menu-link" v-if="!item.child && !item.isHeadr">
-        <span class="menu-icon" v-if="item.icon"> <Icon :icon="item.icon" /></span>
-        <div class="text-box" v-if="item.title">{{ item.title }}</div>
+      <router-link
+        :to="`${item.link}`"
+        class="menu-link"
+        v-if="!item.child && !item.isHeadr"
+      >
+        <span
+          class="menu-icon"
+          v-if="item.icon"
+        >
+          <Icon :icon="item.icon"
+        /></span>
+        <div
+          class="text-box"
+          v-if="item.title"
+        >
+          {{ item.title }}
+        </div>
       </router-link>
 
       <!-- ?? only for menulabel ??  -->
-      <div v-else-if="item.isHeadr && !item.child" class="menulabel">
+      <div
+        v-else-if="item.isHeadr && !item.child"
+        class="menulabel"
+      >
         {{ item.title }}
       </div>
       <!-- !!sub menu parent li !! -->
@@ -30,8 +47,18 @@
         @click="toggleSubmenu(i)"
       >
         <div class="flex-1 flex items-start">
-          <span class="menu-icon" v-show="item.icon"> <Icon :icon="item.icon" /></span>
-          <div class="text-box" v-if="item.title">{{ item.title }}</div>
+          <span
+            class="menu-icon"
+            v-show="item.icon"
+          >
+            <Icon :icon="item.icon"
+          /></span>
+          <div
+            class="text-box"
+            v-if="item.title"
+          >
+            {{ item.title }}
+          </div>
         </div>
         <div class="flex-0">
           <div
@@ -53,13 +80,19 @@
         @after-leave="afterLeave"
       >
         <!-- !! SubMenu !! -->
-        <ul calss="sub-menu " v-if="i === activeSubmenu">
+        <ul
+          calss="sub-menu "
+          v-if="i === activeSubmenu"
+        >
           <li
             v-for="(ci, index) in item.child"
             :key="index"
             class="block ltr:pl-4 rtl:pr-4 ltr:pr-1 rtl:-l-1 mb-4 first:mt-4"
           >
-            <router-link :to="ci.childlink" v-slot="{ isActive }">
+            <router-link
+              :to="ci.childlink"
+              v-slot="{ isActive }"
+            >
               <span
                 class="text-sm flex space-x-3 rtl:space-x-reverse items-center transition-all duration-150"
                 :class="isActive ? ' text-slate-900 dark:text-white font-medium' : 'text-slate-600 dark:text-slate-300'"
@@ -92,9 +125,17 @@
       </a>
     </li> -->
   </ul>
+  <div
+    @click="logout"
+    class="mt-6 font-medium"
+    :class="isActive ? ' text-slate-900 dark:text-white font-medium' : 'text-slate-600 dark:text-slate-300'"
+  >
+    Logout
+  </div>
 </template>
 <script>
 import { useRouter } from 'vue-router';
+import { useStoreAuth } from '@/store/storeAuth';
 import Icon from '../Icon';
 export default {
   components: {
@@ -167,6 +208,10 @@ export default {
       } else {
         this.activeSubmenu = index;
       }
+    },
+    logout() {
+      const storeAuth = useStoreAuth();
+      storeAuth.logoutUser();
     },
   },
 

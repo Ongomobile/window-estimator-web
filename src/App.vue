@@ -4,13 +4,22 @@
 
 <script>
 import { useThemeSettingsStore } from '@/store/themeSettings';
-import { useFirebaseAuth } from 'vuefire';
+import { useStoreAuth } from '@/store/storeAuth';
 
-const auth = useFirebaseAuth();
-// console.log({ auth });
 export default {
+  data() {
+    return {
+      storeAuth: useStoreAuth(),
+    };
+  },
   mounted() {
     this.$store.themeSettingsStore = useThemeSettingsStore();
+    this.init();
+  },
+  methods: {
+    init() {
+      this.storeAuth.init();
+    },
   },
 };
 </script>

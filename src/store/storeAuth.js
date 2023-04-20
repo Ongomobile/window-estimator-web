@@ -7,6 +7,7 @@ import {
   onAuthStateChanged,
 } from '@firebase/auth';
 import { useToast } from 'vue-toastification';
+import { useStoreCounters } from '@/store/storeCounters';
 const auth = useFirebaseAuth();
 const toast = useToast();
 
@@ -17,6 +18,23 @@ export const useStoreAuth = defineStore('storeAuth', {
     };
   },
   actions: {
+    init() {
+      const storeCounters = useStoreCounters();
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // console.log('USER', user);
+          this.user.id = user.uid;
+          this.user.email = user.email;
+          this.router.push('/app/home');
+          storeCounters.init();
+        } else {
+          this.user = {};
+          this.router.replace('/auth');
+          storeCounters.clearNotes();
+        }
+      });
+    },
     registerUser(credentials) {
       createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
         .then((userCredential) => {

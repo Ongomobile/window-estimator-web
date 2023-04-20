@@ -50,6 +50,7 @@ const handleAddCounter = () => {
   };
 
   storeCounters.addCounter(newCounter);
+  storeCounters.closeCounterModal();
 
   windowType.value = '';
   windowLocation.value = '';

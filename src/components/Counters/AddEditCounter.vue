@@ -11,12 +11,13 @@
         >Window Type</label
       >
       <input
+        :value="windowType"
+        @input="$emit('update:windowType', $event.target.value)"
         type="text"
         id="type"
         name="type"
         class="add-counter-input"
         placeholder="Add Window Type"
-        v-model="windowType"
       />
       <label
         for="location"
@@ -24,12 +25,13 @@
         >Window Location</label
       >
       <input
+        :value="windowLocation"
+        @input="$emit('update:windowLocation', $event.target.value)"
         type="text"
         id="location"
         name="location"
         class="add-counter-input"
-        placeholder="Add Location (default in & out)"
-        v-model="windowLocation"
+        placeholder="Add Location"
       />
 
       <label
@@ -39,23 +41,21 @@
       >
       <!-- Use .number modifier to cast input value as number -->
       <input
+        :value="windowPrice"
+        @input="$emit('update:windowPrice', $event.target.value)"
         type="text"
         id="price"
         name="price"
         class="add-counter-input"
-        v-model.number="windowPrice"
         placeholder="Add Window Price"
       />
       <SelectImage
         :images="windowData"
         @on-select-image="selectImage"
       />
-      <input
-        type="submit"
-        class="add-counter-input submit"
-        value="Add Counter"
-        :disabled="isDisabled"
-      />
+      <div class="text-center font-semibold">
+        <slot name="buttons" />
+      </div>
       <div
         class="error-message-wrapper"
         v-if="validated"
@@ -67,28 +67,36 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { ref } from 'vue';
 import { useStoreCounters } from '@/store/storeCounters';
 import SelectImage from '@/components/Counters/SelectImage.vue';
 import windowData from './windowData';
 
 const storeCounters = useStoreCounters();
 
-let selectImage = (imageData) => {
-  imageUrl = imageData.url;
-  alt = imageData.alt;
-};
-
-const counterData = reactive({
-  windowPrice: '',
-  windowType: '',
-  windowLocation: '',
-  imageUrl: '',
-  alt: '',
-  quantity: 0,
-  counterId: 0,
-  subtotal: null,
+const props = defineProps({
+  windowType: {
+    type: String,
+    required: true,
+  },
+  windowLocation: {
+    type: String,
+    default: 'Inside & Out',
+  },
+  windowPrice: {
+    type: String,
+    required: true,
+  },
+  imageUrl: {
+    type: String,
+  },
 });
+
+const emit = defineEmits(['update:windowType', 'update:windowLocation', 'update:windowPrice', 'update:imageUrl']);
+
+let selectImage = (imageData) => {
+  emit('update:imageUrl', imageData.url);
+};
 
 const addCounter = () => {};
 </script>

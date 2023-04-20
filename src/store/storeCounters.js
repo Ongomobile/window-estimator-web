@@ -12,8 +12,8 @@ export const useStoreCounters = defineStore('storeCounters', {
     async getCounters() {
       // get counters
     },
-    async addCounter() {
-      // add counter
+    async addCounter(counter) {
+      console.log({ counter });
     },
     async deleteCounter() {
       // delete counter

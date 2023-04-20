@@ -5,16 +5,35 @@
     title="Add A Counter"
     centered
   >
-    <AddEditCounter />
+    <AddEditCounter
+      v-model:windowType="windowType"
+      v-model:windowLocation="windowLocation"
+      v-model:windowPrice="windowPrice"
+      v-model:imageUrl="imageUrl"
+    >
+      <template #buttons>
+        <button
+          @click="handleAddCounter"
+          class="bg-slate-900 dark:bg-slate-800 dark:border-b dark:border-slate-700 text-white uppercase p-2 rounded-md"
+        >
+          Add New Counter
+        </button>
+      </template>
+    </AddEditCounter>
   </Modal>
 </template>
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import Modal from '@/components/Modal';
 import { useStoreCounters } from '@/store/storeCounters';
 import AddEditCounter from '@/components/Counters/AddEditCounter';
 
 const storeCounters = useStoreCounters();
+
+const windowType = ref('');
+const windowLocation = ref('');
+const windowPrice = ref('');
+const imageUrl = ref('');
 
 const addModal = computed(() => storeCounters.addModal);
 
@@ -22,7 +41,21 @@ const closeAddModal = () => {
   storeCounters.closeCounterModal();
 };
 
-const addCounter = () => {};
+const handleAddCounter = () => {
+  let newCounter = {
+    type: windowType.value,
+    location: windowLocation.value,
+    price: windowPrice.value,
+    url: imageUrl.value,
+  };
+
+  storeCounters.addCounter(newCounter);
+
+  windowType.value = '';
+  windowLocation.value = '';
+  windowPrice.value = '';
+  imageUrl.value = '';
+};
 </script>
 
 <style>

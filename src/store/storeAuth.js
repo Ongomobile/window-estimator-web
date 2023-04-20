@@ -30,7 +30,7 @@ export const useStoreAuth = defineStore('storeAuth', {
           storeCounters.init();
         } else {
           this.user = {};
-          this.router.replace('/auth');
+          this.router.replace('/');
           storeCounters.clearNotes();
         }
       });

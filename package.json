@@ -20,6 +20,7 @@
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue-leaflet/vue-leaflet": "^0.6.1",
     "@vueup/vue-quill": "^1.0.0",
+    "@vueuse/sound": "^2.0.1",
     "animate.css": "^4.1.1",
     "autoprefixer": "^10",
     "axios": "^1.2.2",

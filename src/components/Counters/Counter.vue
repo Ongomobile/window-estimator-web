@@ -69,41 +69,46 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Icon from '../Icon';
-export default {
-  props: {
-    counter: Object,
+import { useSound } from '@vueuse/sound';
+
+const props = defineProps({
+  counter: {
+    type: Object,
+    required: true,
   },
-  methods: {
-    deleteCounter(counter) {
-      this.counterIdToDelete = counter.id;
-      this.$emit('counter-to-delete', this.counterIdToDelete);
-    },
-    incrementQty(counter) {
-      counter.quantity += 1;
-      this.getSubtotal(counter);
-      console.log(counter);
-    },
-    decrementQty(counter) {
-      if (counter.quantity > 0) {
-        counter.quantity -= 1;
-        this.getSubtotal(counter);
-      } else {
-        counter.quantity = 0;
-      }
-    },
-    getSubtotal: function (counter) {
-      let count = counter.quantity;
-      let price = counter.price;
-      let subTotal = count * price;
-      counter.subtotal = subTotal.toFixed(2);
-    },
-    resetSubtotal: function (counter) {
-      counter.quantity = 0;
-      counter.subtotal = 0.0;
-    },
-  },
+});
+
+const deleteCounter = (counter) => {
+  this.counterIdToDelete = counter.id;
+  this.$emit('counter-to-delete', this.counterIdToDelete);
+};
+
+const incrementQty = (counter) => {
+  counter.quantity += 1;
+  getSubtotal(counter);
+};
+
+const decrementQty = (counter) => {
+  if (counter.quantity > 0) {
+    counter.quantity -= 1;
+    getSubtotal(counter);
+  } else {
+    counter.quantity = 0;
+  }
+};
+
+const getSubtotal = (counter) => {
+  let count = counter.quantity;
+  let price = counter.price;
+  let subTotal = count * price;
+  counter.subtotal = subTotal.toFixed(2);
+};
+
+const resetSubtotal = (counter) => {
+  counter.quantity = 0;
+  counter.subtotal = 0.0;
 };
 </script>
 

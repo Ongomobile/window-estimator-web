@@ -50,57 +50,9 @@ const routes = [
         component: () => import('@/views/app/calendar'),
       },
       {
-        path: 'invoice',
-        name: 'invoice',
-        component: () => import('@/views/utility/invoice'),
-        meta: {
-          groupParent: 'Utility',
-        },
-      },
-      {
-        path: 'invoice-preview',
-        name: 'invoice-preview',
-        component: () => import('@/views/utility/invoice/invoice-preview'),
-        meta: {
-          hide: true,
-        },
-      },
-      {
-        path: 'invoice-edit',
-        name: 'invoice-edit',
-        component: () => import('@/views/utility/invoice/invoice-edit'),
-        meta: {
-          groupParent: 'Utility',
-        },
-      },
-      {
-        path: 'invoice-add',
-        name: 'invoice-add',
-        component: () => import('@/views/utility/invoice/invoice-add'),
-        meta: {
-          groupParent: 'Utility',
-        },
-      },
-      {
-        path: 'Pricing',
-        name: 'pricing',
-        component: () => import('@/views/utility/pricing'),
-        meta: {
-          groupParent: 'Utility',
-        },
-      },
-      {
         path: 'faq',
         name: 'faq',
         component: () => import('@/views/utility/faq'),
-        meta: {
-          groupParent: 'Utility',
-        },
-      },
-      {
-        path: 'testimonial',
-        name: 'testimonial',
-        component: () => import('@/views/utility/testimonial'),
         meta: {
           groupParent: 'Utility',
         },
@@ -111,16 +63,6 @@ const routes = [
     path: '/:catchAll(.*)',
     name: '404',
     component: () => import('@/views/404.vue'),
-  },
-  {
-    path: '/coming-soon',
-    name: 'coming-soon',
-    component: () => import('@/views/utility/comming-soon'),
-  },
-  {
-    path: '/under-construction',
-    name: 'under-construction',
-    component: () => import('@/views/utility/under-construction'),
   },
   {
     path: '/error',

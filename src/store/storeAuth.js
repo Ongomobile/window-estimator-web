@@ -31,7 +31,7 @@ export const useStoreAuth = defineStore('storeAuth', {
         } else {
           this.user = {};
           this.router.replace('/');
-          storeCounters.clearNotes();
+          storeCounters.clearCounters();
         }
       });
     },

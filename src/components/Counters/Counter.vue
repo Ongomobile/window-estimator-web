@@ -95,7 +95,7 @@ export default {
     },
     getSubtotal: function (counter) {
       let count = counter.quantity;
-      let price = counter.windowPrice;
+      let price = counter.price;
       let subTotal = count * price;
       counter.subtotal = subTotal.toFixed(2);
     },

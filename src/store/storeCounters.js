@@ -40,6 +40,9 @@ export const useStoreCounters = defineStore('storeCounters', {
               price: doc.data().price,
               type: doc.data().type,
               url: doc.data().url,
+              quantity: doc.data().quantity,
+              subtotal: doc.data().subtotal,
+              alt: doc.data().alt,
             };
             counters.push(counter);
           });
@@ -60,6 +63,9 @@ export const useStoreCounters = defineStore('storeCounters', {
         type: counter.type,
         url: counter.url,
         date,
+        quantity: counter.quantity,
+        subtotal: counter.subtotal,
+        alt: counter.alt,
       });
     },
     async deleteCounter() {

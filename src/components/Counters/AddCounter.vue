@@ -44,9 +44,12 @@ const closeAddModal = () => {
 const handleAddCounter = () => {
   let newCounter = {
     type: windowType.value,
-    location: windowLocation.value,
-    price: windowPrice.value,
+    location: windowLocation.value || 'In & Out',
+    price: parseFloat(windowPrice.value),
     url: imageUrl.value,
+    quantity: 0,
+    subtotal: 0,
+    alt: windowType.value,
   };
 
   storeCounters.addCounter(newCounter);

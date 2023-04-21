@@ -31,7 +31,7 @@
         id="location"
         name="location"
         class="add-counter-input"
-        placeholder="Add Location"
+        placeholder="Default In & Out"
       />
 
       <label

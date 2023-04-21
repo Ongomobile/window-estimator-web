@@ -40,7 +40,7 @@
         >Window Price</label
       >
       <input
-        :value.number="windowPrice"
+        :value="windowPrice"
         @input="$emit('update:windowPrice', $event.target.value)"
         type="number"
         id="price"

@@ -13,11 +13,6 @@ export const menuItems = [
     title: 'apps',
   },
   {
-    title: 'Calender',
-    icon: 'heroicons-outline:calendar',
-    link: 'calender',
-  },
-  {
     title: 'Counters',
     icon: 'heroicons-outline:calculator',
     link: 'counters',

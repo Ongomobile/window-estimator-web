@@ -9,7 +9,16 @@
       />
     </div>
     <AddCounter />
-    <div class="flex flex-col max-w-sm">
+    <!-- display: flex;
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  background-color: #fff; -->
+
+    <div class="flex flex-col max-w-sm items-center">
+      <div class="flex p-5 rounded-lg bg-white min-w-[318px] mt-8">
+        <p class="total-text">Total Price {{ getTotals }}</p>
+      </div>
       <draggable
         v-model="storeCounters.counters"
         :animation="200"

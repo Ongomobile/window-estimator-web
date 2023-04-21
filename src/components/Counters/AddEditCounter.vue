@@ -39,11 +39,10 @@
         class="add-counter-label"
         >Window Price</label
       >
-      <!-- Use .number modifier to cast input value as number -->
       <input
-        :value="windowPrice"
+        :value.number="windowPrice"
         @input="$emit('update:windowPrice', $event.target.value)"
-        type="text"
+        type="number"
         id="price"
         name="price"
         class="add-counter-input"
@@ -67,7 +66,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useStoreCounters } from '@/store/storeCounters';
 import SelectImage from '@/components/Counters/SelectImage.vue';
 import windowData from './windowData';
@@ -84,7 +83,7 @@ const props = defineProps({
     default: 'Inside & Out',
   },
   windowPrice: {
-    type: String,
+    type: Number,
     required: true,
   },
   imageUrl: {
@@ -98,5 +97,11 @@ let selectImage = (imageData) => {
   emit('update:imageUrl', imageData.url);
 };
 
-const addCounter = () => {};
+const isDisabled = computed(() => {
+  if (this.windowType !== '' && typeof this.windowPrice === 'number') {
+    return false;
+  } else {
+    return true;
+  }
+});
 </script>

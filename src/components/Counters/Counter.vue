@@ -114,7 +114,6 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 15px;
-  margin-right: 15px;
   margin-bottom: 20px;
   border: solid 1px #eee;
   border-radius: 5px;

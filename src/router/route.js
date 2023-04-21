@@ -45,11 +45,6 @@ const routes = [
         component: () => import('@/views/app/counters'),
       },
       {
-        path: 'calender',
-        name: 'calender',
-        component: () => import('@/views/app/calendar'),
-      },
-      {
         path: 'faq',
         name: 'faq',
         component: () => import('@/views/utility/faq'),

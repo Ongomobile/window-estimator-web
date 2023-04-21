@@ -98,22 +98,6 @@ const routes = [
         },
       },
       {
-        path: 'blog',
-        name: 'blog',
-        component: () => import('@/views/utility/blog'),
-        meta: {
-          groupParent: 'Utility',
-        },
-      },
-      {
-        path: 'blog-details',
-        name: 'blog-details',
-        component: () => import('@/views/utility/blog/blog-details'),
-        meta: {
-          groupParent: 'Utility',
-        },
-      },
-      {
         path: 'testimonial',
         name: 'testimonial',
         component: () => import('@/views/utility/testimonial'),

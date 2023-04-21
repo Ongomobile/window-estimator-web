@@ -83,7 +83,7 @@ const props = defineProps({
     default: 'Inside & Out',
   },
   windowPrice: {
-    type: Number,
+    type: String,
     required: true,
   },
   imageUrl: {

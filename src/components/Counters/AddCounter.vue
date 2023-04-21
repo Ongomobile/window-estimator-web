@@ -32,7 +32,7 @@ const storeCounters = useStoreCounters();
 
 const windowType = ref('');
 const windowLocation = ref('');
-const windowPrice = ref(0);
+const windowPrice = ref('');
 const imageUrl = ref('');
 
 const addModal = computed(() => storeCounters.addModal);
@@ -54,7 +54,7 @@ const handleAddCounter = () => {
 
   windowType.value = '';
   windowLocation.value = '';
-  windowPrice.value = 0;
+  windowPrice.value = '';
   imageUrl.value = '';
 };
 </script>

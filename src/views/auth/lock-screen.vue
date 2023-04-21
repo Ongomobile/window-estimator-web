@@ -20,25 +20,19 @@
 
           <h4>
             Unlock your Project
-            <span class="text-slate-800 dark:text-slate-400 font-bold"
-              >performance</span
-            >
+            <span class="text-slate-800 dark:text-slate-400 font-bold">performance</span>
           </h4>
         </div>
-        <div
-          class="absolute left-0 2xl:bottom-[-160px] bottom-[-130px] h-full w-full z-[-1]"
-        >
+        <!-- <div class="absolute left-0 2xl:bottom-[-160px] bottom-[-130px] h-full w-full z-[-1]">
           <img
             src="@/assets/images/auth/ils1.svg"
             alt=""
             class="h-full w-full object-contain"
           />
-        </div>
+        </div> -->
       </div>
       <div class="right-column relative">
-        <div
-          class="inner-content h-full flex flex-col bg-white dark:bg-slate-800"
-        >
+        <div class="inner-content h-full flex flex-col bg-white dark:bg-slate-800">
           <div class="auth-box2 flex flex-col justify-center h-full">
             <div class="mobile-logo text-center mb-6 lg:hidden block">
               <router-link to="/"
@@ -50,11 +44,9 @@
             </div>
             <div class="text-center mb-10">
               <h4 class="font-medium mb-4">Lock Screen</h4>
-              <div class="text-slate-500 dark:text-slate-400 text-base">
-                Enter your password to unlock the screen!
-              </div>
+              <div class="text-slate-500 dark:text-slate-400 text-base">Enter your password to unlock the screen!</div>
             </div>
-            <div class="author-bio text-center mb-8">
+            <!-- <div class="author-bio text-center mb-8">
               <div class="h-14 w-14 mx-auto rounded-full">
                 <img
                   src="@/assets/images/all-img/user-big.png"
@@ -67,7 +59,7 @@
               >
                 Kathryn Murphy
               </div>
-            </div>
+            </div> -->
             <Lockscreen />
 
             <div
@@ -82,16 +74,14 @@
               </router-link>
             </div>
           </div>
-          <div class="auth-footer text-center">
-            Copyright 2021, Dashcode All Rights Reserved.
-          </div>
+          <div class="auth-footer text-center">Copyright 2023, All Rights Reserved.</div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import Lockscreen from "./common/lockscreen";
+import Lockscreen from './common/lockscreen';
 
 export default {
   components: {

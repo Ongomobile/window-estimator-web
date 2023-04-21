@@ -1,12 +1,16 @@
 <template>
   <div class="counter-wrapper">
     <div class="counter-type-wrapper">
-      <p class="counter-type">{{ counter.windowType }}</p>
-      <p class="counter-type">{{ counter.windowLocation }}</p>
+      <p class="counter-type">{{ counter.type }}</p>
+      <p class="counter-type">{{ counter.location }}</p>
     </div>
     <div class="counter-controls-wrapper">
       <div class="counter-image-wrapper">
-        <img :src="counter.imageUrl" :alt="counter.alt" class="counter-image" />
+        <img
+          :src="counter.url"
+          :alt="counter.alt"
+          class="counter-image"
+        />
       </div>
       <div class="counter-tally-wrapper">
         <input
@@ -50,8 +54,17 @@
         </svg>
       </span>
       <label class="counter-subtotal-label">Subtotal</label>
-      <span id="" class="counter-subtotal-display">{{ counter.subtotal }}</span>
-      <p class="reset-btn" @click="resetSubtotal(counter)">reset</p>
+      <span
+        id=""
+        class="counter-subtotal-display"
+        >{{ counter.subtotal }}</span
+      >
+      <p
+        class="reset-btn"
+        @click="resetSubtotal(counter)"
+      >
+        reset
+      </p>
     </div>
   </div>
 </template>

@@ -57,19 +57,28 @@ export const useStoreCounters = defineStore('storeCounters', {
     async addCounter(counter) {
       let currentDate = new Date().getTime(),
         date = currentDate.toString();
-      await addDoc(countersCollectionRef, {
-        location: counter.location,
-        price: counter.price,
-        type: counter.type,
-        url: counter.url,
-        date,
-        quantity: counter.quantity,
-        subtotal: counter.subtotal,
-        alt: counter.alt,
-      });
+      await addDoc(
+        countersCollectionRef,
+        {
+          location: counter.location,
+          price: counter.price,
+          type: counter.type,
+          url: counter.url,
+          date,
+          quantity: counter.quantity,
+          subtotal: counter.subtotal,
+          alt: counter.alt,
+        },
+        (error) => {
+          console.log('error.message', error.message);
+        }
+      );
     },
     async deleteCounter(id) {
-      await deleteDoc(doc(countersCollectionRef, id));
+      await deleteDoc(doc(countersCollectionRef, id)),
+        (error) => {
+          console.log('error.message', error.message);
+        };
     },
     async updateCounter() {
       // update counter

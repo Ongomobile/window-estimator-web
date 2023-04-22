@@ -56,17 +56,16 @@
         <slot name="buttons" />
       </div>
       <div
-        class="error-message-wrapper"
-        v-if="validated"
+        class="bg-red-500 p-2 text-center mt-4"
+        v-if="!validated"
       >
-        <p class="error-message">* type & price are required *</p>
+        <p class="uppercase text-white">* type & price are required *</p>
       </div>
     </form>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
 import { useStoreCounters } from '@/store/storeCounters';
 import SelectImage from '@/components/Counters/SelectImage.vue';
 import windowData from './windowData';
@@ -89,19 +88,20 @@ const props = defineProps({
   imageUrl: {
     type: String,
   },
+  validated: {
+    type: Boolean,
+  },
 });
 
-const emit = defineEmits(['update:windowType', 'update:windowLocation', 'update:windowPrice', 'update:imageUrl']);
+const emit = defineEmits([
+  'update:windowType',
+  'update:windowLocation',
+  'update:windowPrice',
+  'update:imageUrl',
+  'update:validated',
+]);
 
 let selectImage = (imageData) => {
   emit('update:imageUrl', imageData.url);
 };
-
-const isDisabled = computed(() => {
-  if (this.windowType !== '' && typeof this.windowPrice === 'number') {
-    return false;
-  } else {
-    return true;
-  }
-});
 </script>

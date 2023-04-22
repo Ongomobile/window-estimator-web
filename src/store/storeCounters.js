@@ -14,6 +14,8 @@ export const useStoreCounters = defineStore('storeCounters', {
       addModal: false,
       editModal: false,
       countersLoaded: false,
+      isValid: false,
+      isDisabled: true,
     };
   },
   actions: {
@@ -22,7 +24,6 @@ export const useStoreCounters = defineStore('storeCounters', {
       // Initialize our database refs
       countersCollectionRef = collection(db, 'users', storeAuth.user.id, 'counters');
       countersCollectionQuery = query(countersCollectionRef, orderBy('date', 'desc'));
-      console.log(countersCollectionRef);
 
       this.getCounters();
     },

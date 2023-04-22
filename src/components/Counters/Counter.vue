@@ -71,9 +71,18 @@
 
 <script setup>
 import Icon from '../Icon';
+import { ref, watch } from 'vue';
 import { useSound } from '@vueuse/sound';
-import clickSound from '@/assets/sounds/click-sound.mp3';
-const { play } = useSound(clickSound);
+import plusSound from '@/assets/sounds/click-sound.mp3';
+
+import minusSound from '@/assets/sounds/minus-click.mp3';
+
+const plus = useSound(plusSound);
+const minus = useSound(minusSound);
+
+const active = ref(false);
+
+// const { play } = useSound(clickSound);
 
 const props = defineProps({
   counter: {
@@ -88,13 +97,14 @@ const deleteCounter = (counter) => {
 };
 
 const incrementQty = (counter) => {
-  play();
+  plus.play();
   counter.quantity += 1;
   getSubtotal(counter);
 };
 
 const decrementQty = (counter) => {
   if (counter.quantity > 0) {
+    minus.play();
     counter.quantity -= 1;
     getSubtotal(counter);
   } else {

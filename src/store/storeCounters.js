@@ -68,8 +68,8 @@ export const useStoreCounters = defineStore('storeCounters', {
         alt: counter.alt,
       });
     },
-    async deleteCounter() {
-      // delete counter
+    async deleteCounter(id) {
+      await deleteDoc(doc(countersCollectionRef, id));
     },
     async updateCounter() {
       // update counter

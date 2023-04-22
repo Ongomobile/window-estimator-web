@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="counter-subtotal-wraper">
-      <span @click="deleteCounter(counter)">
+      <span @click="handleDeleteCounter(counter.id)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -71,18 +71,16 @@
 
 <script setup>
 import Icon from '../Icon';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
+import { useStoreCounters } from '@/store/storeCounters';
 import { useSound } from '@vueuse/sound';
 import plusSound from '@/assets/sounds/click-sound.mp3';
-
 import minusSound from '@/assets/sounds/minus-click.mp3';
 
 const plus = useSound(plusSound);
 const minus = useSound(minusSound);
-
 const active = ref(false);
-
-// const { play } = useSound(clickSound);
+const storeCounters = useStoreCounters();
 
 const props = defineProps({
   counter: {
@@ -91,9 +89,8 @@ const props = defineProps({
   },
 });
 
-const deleteCounter = (counter) => {
-  this.counterIdToDelete = counter.id;
-  this.$emit('counter-to-delete', this.counterIdToDelete);
+const handleDeleteCounter = (id) => {
+  storeCounters.deleteCounter(id);
 };
 
 const incrementQty = (counter) => {

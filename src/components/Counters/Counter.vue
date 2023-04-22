@@ -72,6 +72,8 @@
 <script setup>
 import Icon from '../Icon';
 import { useSound } from '@vueuse/sound';
+import clickSound from '@/assets/sounds/click-sound.mp3';
+const { play } = useSound(clickSound);
 
 const props = defineProps({
   counter: {
@@ -86,6 +88,7 @@ const deleteCounter = (counter) => {
 };
 
 const incrementQty = (counter) => {
+  play();
   counter.quantity += 1;
   getSubtotal(counter);
 };

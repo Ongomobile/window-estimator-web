@@ -21,19 +21,25 @@ export const useStoreAuth = defineStore('storeAuth', {
     init() {
       const storeCounters = useStoreCounters();
 
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // console.log('USER', user);
-          this.user.id = user.uid;
-          this.user.email = user.email;
-          this.router.push('/app/home');
-          storeCounters.init();
-        } else {
-          this.user = {};
-          this.router.replace('/');
-          storeCounters.clearCounters();
+      onAuthStateChanged(
+        auth,
+        (user) => {
+          if (user) {
+            // console.log('USER', user);
+            this.user.id = user.uid;
+            this.user.email = user.email;
+            this.router.push('/app/home');
+            storeCounters.init();
+          } else {
+            this.user = {};
+            this.router.replace('/');
+            storeCounters.clearCounters();
+          }
+        },
+        (error) => {
+          console.log('error.message', error.message);
         }
-      });
+      );
     },
     registerUser(credentials) {
       createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
@@ -104,7 +110,7 @@ export const useStoreAuth = defineStore('storeAuth', {
           // console.log('User signed out')
         })
         .catch((error) => {
-          // console.log(error.message)
+          console.log(error.message);
         });
     },
   },

@@ -99,4 +99,11 @@ export const useStoreCounters = defineStore('storeCounters', {
       this.editModal = false;
     },
   },
+  getters: {
+    getCounterContent: (state) => {
+      return (id) => {
+        return state.counters.filter((counter) => counter.id === id)[0];
+      };
+    },
+  },
 });

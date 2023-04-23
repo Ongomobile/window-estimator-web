@@ -45,6 +45,11 @@ const routes = [
         component: () => import('@/views/app/counters'),
       },
       {
+        path: '/editCounters/:id',
+        name: 'edit-counters',
+        component: () => import('@/views/app/editCounters'),
+      },
+      {
         path: 'faq',
         name: 'faq',
         component: () => import('@/views/utility/faq'),

@@ -9,12 +9,6 @@
       />
     </div>
     <AddCounter />
-    <!-- display: flex;
-  padding: 20px;
-  box-shadow: var(--box-shadow);
-  border-radius: 5px;
-  background-color: #fff; -->
-
     <div class="flex flex-col max-w-sm items-center">
       <div class="flex p-5 rounded-lg bg-white min-w-[318px] mt-8">
         <p class="total-text">Total Price {{ getTotals }}</p>
@@ -51,8 +45,4 @@ const counters = ref([]);
 const openAddModal = () => {
   storeCounters.openCounterModal();
 };
-
-// onMounted(() => {
-//   storeCounters.counters;
-// });
 </script>

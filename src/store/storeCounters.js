@@ -95,5 +95,8 @@ export const useStoreCounters = defineStore('storeCounters', {
     closeCounterModal() {
       this.addModal = false;
     },
+    closeEditCounterModal() {
+      this.editModal = false;
+    },
   },
 });

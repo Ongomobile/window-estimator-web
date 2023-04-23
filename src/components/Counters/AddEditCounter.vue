@@ -43,6 +43,7 @@
         :value="windowPrice"
         @input="$emit('update:windowPrice', $event.target.value)"
         type="number"
+        step="any"
         id="price"
         name="price"
         class="add-counter-input"

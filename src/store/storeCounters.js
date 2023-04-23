@@ -81,8 +81,11 @@ export const useStoreCounters = defineStore('storeCounters', {
           console.log('error.message', error.message);
         };
     },
-    async updateCounter() {
-      // update counter
+    async updateCounter(data) {
+      console.log({ data });
+      // await updateDoc(doc(countersCollectionRef, id), {
+      //   data,
+      // });
     },
     clearCounters() {
       this.counters = [];

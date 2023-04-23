@@ -1,4 +1,27 @@
 <template>
+  <Modal
+    :activeModal="editModal"
+    @close="closeEditModal"
+    title="Edit A Counter"
+    centered
+  >
+    <AddEditCounter
+      v-model:windowType="counterData.type"
+      v-model:windowLocation="counterData.location"
+      v-model:windowPrice="counterPrice"
+      v-model:imageUrl="counterData.url"
+      :validated="(storeCounters.isValid = true)"
+    >
+      <template #buttons>
+        <button
+          @click="handleEditCounter"
+          class="bg-slate-900 dark:bg-slate-800 dark:border-b dark:border-slate-700 text-white uppercase p-2 rounded-md"
+        >
+          Edit Counter
+        </button>
+      </template>
+    </AddEditCounter>
+  </Modal>
   <div class="counter-wrapper">
     <div class="counter-type-wrapper">
       <p class="counter-type">{{ counter.type }}</p>
@@ -65,7 +88,7 @@
       >
         reset
       </p>
-      <span @click="handelEditCounter(counter.id)">
+      <span @click="handelCounterData(counter.id)">
         <svg
           fill="#475569"
           version="1.1"
@@ -109,7 +132,9 @@
 
 <script setup>
 import Icon from '../Icon';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import Modal from '@/components/Modal';
+import AddEditCounter from '@/components/Counters/AddEditCounter';
 import { useStoreCounters } from '@/store/storeCounters';
 import { useSound } from '@vueuse/sound';
 import plusSound from '@/assets/sounds/click-sound.mp3';
@@ -117,8 +142,14 @@ import minusSound from '@/assets/sounds/minus-click.mp3';
 
 const plus = useSound(plusSound);
 const minus = useSound(minusSound);
-const active = ref(false);
 const storeCounters = useStoreCounters();
+const counterData = ref({});
+let counterPrice = null;
+const editModal = computed(() => storeCounters.editModal);
+
+const closeEditModal = () => {
+  storeCounters.closeEditCounterModal();
+};
 
 const props = defineProps({
   counter: {
@@ -129,6 +160,10 @@ const props = defineProps({
 
 const handleDeleteCounter = (id) => {
   storeCounters.deleteCounter(id);
+};
+
+const handleEditCounter = () => {
+  storeCounters.updateCounter(counterData.value);
 };
 
 const incrementQty = (counter) => {
@@ -159,8 +194,11 @@ const resetSubtotal = (counter) => {
   counter.subtotal = 0.0;
 };
 
-const handelEditCounter = (id) => {
-  console.log({ id });
+const handelCounterData = (id) => {
+  storeCounters.editModal = true;
+  counterData.value = storeCounters.getCounterContent(id);
+  counterPrice = parseFloat(counterData.value.price);
+  console.log(counterData.value);
 };
 </script>
 

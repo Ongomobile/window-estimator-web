@@ -66,7 +66,7 @@
         reset
       </p>
       <RouterLink
-        :to="`/app/counters/edit/${counter.id}`"
+        :to="`/app/editCounter/${counter.id}`"
         class="card-footer-item"
       >
         <span>

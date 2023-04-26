@@ -42,12 +42,12 @@ const routes = [
       {
         path: 'counters',
         name: 'counters',
-        component: () => import('@/views/app/Counters'),
+        component: () => import('@/views/app/Counters.vue'),
       },
       {
         path: 'editCounter/:id',
         name: 'edit-counter',
-        component: () => import('@/views/app/EditCounter'),
+        component: () => import('@/views/app/EditCounter.vue'),
       },
       {
         path: 'faq',

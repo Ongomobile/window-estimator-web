@@ -47,7 +47,7 @@ const routes = [
       {
         path: 'editCounter/:id',
         name: 'edit-counter',
-        component: () => import('@/views/app/editCounter.vue'),
+        component: () => import('@/views/app/editCounter'),
       },
       {
         path: 'faq',

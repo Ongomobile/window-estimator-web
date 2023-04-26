@@ -82,6 +82,7 @@ export const useStoreCounters = defineStore('storeCounters', {
         };
     },
     async updateCounter(id, counter) {
+      console.log(counter);
       await updateDoc(doc(countersCollectionRef, id), {
         type: counter.type,
       }),

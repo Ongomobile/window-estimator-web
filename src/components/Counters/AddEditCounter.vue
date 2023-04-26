@@ -70,9 +70,7 @@ import SelectImage from '@/components/Counters/SelectImage.vue';
 import windowData from './windowData';
 
 const storeCounters = useStoreCounters();
-onMounted(() => {
-  console.log(props);
-});
+
 const props = defineProps({
   windowType: {
     type: String,

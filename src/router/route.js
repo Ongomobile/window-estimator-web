@@ -45,6 +45,14 @@ const routes = [
         component: () => import('@/views/app/counters'),
       },
       {
+        path: 'counters/edit/:id',
+        name: 'edit-counters',
+        component: () => import('@/views/app/counters/editCounter'),
+        meta: {
+          hide: true,
+        },
+      },
+      {
         path: 'faq',
         name: 'faq',
         component: () => import('@/views/utility/faq'),

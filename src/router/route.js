@@ -45,7 +45,7 @@ const routes = [
         component: () => import('@/views/app/counters'),
       },
       {
-        path: 'counters/edit/:id',
+        path: 'app/counters/edit/:id',
         name: 'editCounter',
         component: () => import('@/views/app/counters/editCounter.vue'),
       },

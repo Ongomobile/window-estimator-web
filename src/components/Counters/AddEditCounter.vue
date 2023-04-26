@@ -1,9 +1,6 @@
 <template>
   <div class="add-counter-form--wrapper">
-    <form
-      class="add-counter-form"
-      @submit.prevent="addCounter"
-    >
+    <form class="add-counter-form">
       <label
         for="type"
         class="add-counter-label"
@@ -67,12 +64,15 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import { useStoreCounters } from '@/store/storeCounters';
 import SelectImage from '@/components/Counters/SelectImage.vue';
 import windowData from './windowData';
 
 const storeCounters = useStoreCounters();
-
+onMounted(() => {
+  console.log(props);
+});
 const props = defineProps({
   windowType: {
     type: String,

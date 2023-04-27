@@ -133,10 +133,6 @@ const handleDeleteCounter = (id) => {
   storeCounters.deleteCounter(id);
 };
 
-const saveEditedCounter = () => {
-  storeCounters.updateCounter(counterData.value);
-};
-
 const incrementQty = (counter) => {
   plus.play();
   counter.quantity += 1;

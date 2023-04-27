@@ -38,10 +38,10 @@ const router = useRouter();
 
 const counterData = ref({});
 counterData.value = storeCounters.getCounterContent(route.params.id);
-const windowType = ref('');
-const windowLocation = ref('');
-const windowPrice = ref('');
-const imageUrl = ref('');
+// const windowType = ref('');
+// const windowLocation = ref('');
+// const windowPrice = ref('');
+// const imageUrl = ref('');
 
 const handleEditCounter = () => {
   storeCounters.updateCounter(route.params.id, counterData.value);

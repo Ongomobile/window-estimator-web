@@ -82,13 +82,22 @@ export const useStoreCounters = defineStore('storeCounters', {
         };
     },
     async updateCounter(id, counter) {
-      console.log('id', id, 'counter', counter);
-      await updateDoc(doc(countersCollectionRef, id), {
-        counter,
-      }),
+      await updateDoc(
+        doc(countersCollectionRef, id),
+        {
+          location: counter.location,
+          price: counter.price,
+          type: counter.type,
+          url: counter.url,
+          date: counter.date,
+          quantity: counter.quantity,
+          subtotal: counter.subtotal,
+          alt: counter.alt,
+        },
         (error) => {
           console.log('error.message', error.message);
-        };
+        }
+      );
     },
     clearCounters() {
       this.counters = [];

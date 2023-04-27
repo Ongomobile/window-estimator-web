@@ -45,7 +45,7 @@ counterData.value = storeCounters.getCounterContent(route.params.id);
 
 const handleEditCounter = () => {
   storeCounters.updateCounter(route.params.id, counterData.value);
-  router.push('/app/counters');
+  // router.push('/app/counters');
 };
 
 // watch([windowType, () => windowPrice.value], ([type, price]) => {

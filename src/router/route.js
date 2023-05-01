@@ -40,9 +40,9 @@ const routes = [
         },
       },
       {
-        path: 'counters',
-        name: 'counters',
-        component: () => import('@/views/app/counters'),
+        path: 'invoices',
+        name: 'invoices',
+        component: () => import('@/views/app/invoices'),
       },
       {
         path: 'editCounter/:id',

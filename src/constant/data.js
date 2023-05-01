@@ -4,8 +4,8 @@ export const menuItems = [
     title: 'menu',
   },
   {
-    title: 'Dashboard',
-    icon: 'heroicons-outline:home',
+    title: 'Counters',
+    icon: 'heroicons-outline:calculator',
     link: 'home',
   },
   {
@@ -13,9 +13,9 @@ export const menuItems = [
     title: 'apps',
   },
   {
-    title: 'Counters',
+    title: 'Invoices',
     icon: 'heroicons-outline:calculator',
-    link: 'counters',
+    link: 'invoices',
   },
 ];
 // menuseetins

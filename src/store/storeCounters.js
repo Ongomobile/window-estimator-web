@@ -1,5 +1,14 @@
 import { defineStore } from 'pinia';
-import { addDoc, collection, onSnapshot, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  doc,
+  deleteDoc,
+  updateDoc,
+  query,
+  orderBy,
+} from 'firebase/firestore';
 import { useStoreAuth } from '@/store/storeAuth';
 import { db } from '@/firebase';
 let countersCollectionRef;
@@ -22,8 +31,16 @@ export const useStoreCounters = defineStore('storeCounters', {
     init() {
       const storeAuth = useStoreAuth();
       // Initialize our database refs
-      countersCollectionRef = collection(db, 'users', storeAuth.user.id, 'counters');
-      countersCollectionQuery = query(countersCollectionRef, orderBy('date', 'desc'));
+      countersCollectionRef = collection(
+        db,
+        'users',
+        storeAuth.user.id,
+        'counters'
+      );
+      countersCollectionQuery = query(
+        countersCollectionRef,
+        orderBy('date', 'desc')
+      );
 
       this.getCounters();
     },
@@ -82,22 +99,36 @@ export const useStoreCounters = defineStore('storeCounters', {
         };
     },
     async updateCounter(id, counter) {
-      await updateDoc(
-        doc(countersCollectionRef, id),
-        {
-          location: counter.location,
-          price: counter.price,
-          type: counter.type,
-          url: counter.url,
-          date: counter.date,
-          quantity: counter.quantity,
-          subtotal: counter.subtotal,
-          alt: counter.alt,
-        },
-        (error) => {
-          console.log('error.message', error.message);
-        }
-      );
+      console.log(id, counter);
+      console.log(countersCollectionRef);
+      // const docRef = (db, 'users', '46BolHpfMebEgGePd55dGERuaDr2', 'counters');
+      await updateDoc(doc(countersCollectionRef, id), {
+        location: counter.location,
+        price: counter.price,
+        type: counter.type,
+        url: counter.url,
+        date: counter.date,
+        quantity: counter.quantity,
+        subtotal: counter.subtotal,
+        alt: counter.alt,
+      });
+
+      // await updateDoc(
+      //   doc(docRef, id),
+      //   {
+      //     location: counter.location,
+      //     price: counter.price,
+      //     type: counter.type,
+      //     url: counter.url,
+      //     date: counter.date,
+      //     quantity: counter.quantity,
+      //     subtotal: counter.subtotal,
+      //     alt: counter.alt,
+      //   },
+      //   (error) => {
+      //     console.log('error.message', error.message);
+      //   }
+      // );
     },
     clearCounters() {
       this.counters = [];

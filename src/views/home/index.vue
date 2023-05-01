@@ -1,15 +1,52 @@
 <template>
-  <div>Your content goes here.....</div>
+  <div>
+    <div class="px-6 max-w-sm">
+      <Button
+        icon="heroicons-outline:plus"
+        text="Add Counter"
+        btnClass="btn-dark w-full block  "
+        @click="openAddModal"
+      />
+    </div>
+    <AddCounter />
+    <div class="flex flex-col max-w-sm items-center">
+      <div class="flex p-5 rounded-lg bg-white min-w-[318px] mt-8">
+        <p class="total-text">Total Price {{ getTotals }}</p>
+      </div>
+      <draggable
+        v-model="storeCounters.counters"
+        :animation="200"
+        :itemKey="id"
+        class="p-3 flex flex-col list-none overflow-auto overflow-y-scroll"
+      >
+        <template #item="{ element }">
+          <Counter
+            :counter="element"
+            @counter-to-delete="deleteSelectedCounter"
+          />
+        </template>
+      </draggable>
+    </div>
+  </div>
 </template>
+
 <script setup>
-import { useFirestore, useCollection, useCurrentUser } from 'vuefire';
-import { collection, query, getDocs } from 'firebase/firestore';
-const db = useFirestore();
-// VueFire abstraction
-const usersCollection = useCollection(collection(db, 'users'));
-const currentUser = useCurrentUser();
-const currentUserId = currentUser.value.uid;
-const usersArr = usersCollection.value;
-const currentUserData = usersArr.filter((user) => user.id === currentUserId);
+import { ref, onMounted, onBeforeMount } from 'vue';
+import Button from '@/components/Button';
+import AddCounter from '@/components/Counters/AddCounter';
+import { useStoreCounters } from '@/store/storeCounters';
+import Counter from '@/components/Counters/Counter.vue';
+import draggable from 'vuedraggable';
+
+const storeCounters = useStoreCounters();
+const drag = ref(false);
+const counters = ref([]);
+
+const openAddModal = () => {
+  storeCounters.openCounterModal();
+};
+
+onBeforeMount(() => {
+  storeCounters.getCounters();
+});
 </script>
-<style lang=""></style>

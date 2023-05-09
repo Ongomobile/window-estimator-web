@@ -4,9 +4,19 @@ export const menuItems = [
     title: 'menu',
   },
   {
-    title: 'Counters',
-    icon: 'heroicons-outline:calculator',
-    link: 'home',
+    title: 'Home',
+    icon: 'heroicons-outline:home',
+    isOpen: true,
+    child: [
+      {
+        childtitle: 'My Counters',
+        childlink: 'home',
+      },
+      {
+        childtitle: 'Customers',
+        childlink: 'customers',
+      },
+    ],
   },
   {
     isHeadr: true,

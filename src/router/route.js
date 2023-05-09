@@ -32,6 +32,11 @@ const routes = [
     meta: { isProtected: true },
     children: [
       {
+        path: 'blank-page',
+        name: '',
+        component: () => import('@/views/blank-page.vue'),
+      },
+      {
         path: 'home',
         name: 'home',
         component: () => import('@/views/home/index.vue'),
@@ -40,9 +45,20 @@ const routes = [
         },
       },
       {
+        path: 'customers',
+        name: 'customers',
+        component: () => import('@/views/home/customers.vue'),
+        meta: {
+          hide: true,
+        },
+      },
+      {
         path: 'invoices',
         name: 'invoices',
         component: () => import('@/views/app/invoices'),
+        meta: {
+          hide: true,
+        },
       },
       {
         path: 'editCounter/:id',

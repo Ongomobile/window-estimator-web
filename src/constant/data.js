@@ -18,15 +18,15 @@ export const menuItems = [
       },
     ],
   },
-  {
-    isHeadr: true,
-    title: 'apps',
-  },
-  {
-    title: 'Invoices',
-    icon: 'heroicons-outline:calculator',
-    link: 'invoices',
-  },
+  // {
+  //   isHeadr: true,
+  //   title: 'apps',
+  // },
+  // {
+  //   title: 'Invoices',
+  //   icon: 'heroicons-outline:calculator',
+  //   link: 'invoices',
+  // },
 ];
 // menuseetins
 

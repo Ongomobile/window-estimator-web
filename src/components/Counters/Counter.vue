@@ -6,18 +6,13 @@
     </div>
     <div class="counter-controls-wrapper">
       <div class="counter-image-wrapper">
-        <img
-          :src="counter.url"
-          :alt="counter.alt"
-          class="counter-image"
-        />
+        <img :src="counter.url" :alt="counter.alt" class="counter-image" />
       </div>
       <div class="counter-tally-wrapper">
         <input
           type="image"
           id="image"
           class="counter-qty-btn"
-          alt="decrement quantity"
           src="https://res.cloudinary.com/dnpje4e34/image/upload/v1641180924/Minus-btn_2x_qr2bqg.png"
           @click="decrementQty(counter)"
         />
@@ -30,7 +25,6 @@
           type="image"
           id="image"
           class="counter-qty-btn"
-          alt="increment quantity"
           src="https://res.cloudinary.com/dnpje4e34/image/upload/v1641180977/Plus-btn_2x_gtzatk.png"
           @click="incrementQty(counter)"
         />
@@ -54,17 +48,8 @@
         </svg>
       </span>
       <label class="counter-subtotal-label">Subtotal</label>
-      <span
-        id=""
-        class="counter-subtotal-display"
-        >{{ counter.subtotal }}</span
-      >
-      <p
-        class="reset-btn"
-        @click="resetSubtotal(counter)"
-      >
-        reset
-      </p>
+      <span id="" class="counter-subtotal-display">{{ counter.subtotal }}</span>
+      <p class="reset-btn" @click="resetSubtotal(counter)">reset</p>
       <RouterLink
         :to="`/app/editCounter/${counter.id}`"
         class="card-footer-item"
@@ -82,10 +67,7 @@
             xml:space="preserve"
             stroke="#475569"
           >
-            <g
-              id="SVGRepo_bgCarrier"
-              stroke-width="0"
-            />
+            <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
             <g
               id="SVGRepo_tracerCarrier"

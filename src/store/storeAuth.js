@@ -25,11 +25,10 @@ export const useStoreAuth = defineStore('storeAuth', {
         auth,
         (user) => {
           if (user) {
-            // console.log('USER', user);
             this.user.id = user.uid;
             this.user.email = user.email;
             this.router.push('/app/home');
-            storeCounters.init();
+            storeCounters.init(this.user.id);
           } else {
             this.user = {};
             this.router.replace('/');
@@ -42,10 +41,13 @@ export const useStoreAuth = defineStore('storeAuth', {
       );
     },
     registerUser(credentials) {
-      createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
+      createUserWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      )
         .then((userCredential) => {
           const user = userCredential.user;
-          // console.log('user: ', user);
           this.router.push('/');
           toast.success(' Account Created successfully', {
             timeout: 2000,
@@ -73,7 +75,6 @@ export const useStoreAuth = defineStore('storeAuth', {
       signInWithEmailAndPassword(auth, credentials.email, credentials.password)
         .then((userCredential) => {
           const user = userCredential.user;
-          // console.log('user: ', user);
           this.router.push('/app/home');
           toast.success(' Login  successfull', {
             timeout: 2000,
@@ -115,26 +116,3 @@ export const useStoreAuth = defineStore('storeAuth', {
     },
   },
 });
-
-// Add a new document with a generated id.
-// async function addUser(email, name) {
-//   try {
-//     const user = useCurrentUser();
-//     const userId = user.value.uid;
-//     const userRef = doc(db, 'users', userId);
-
-//     const newUser = {
-//       name: name,
-//       email: email,
-//       counters: [],
-//       estimates: [],
-//       customers: [],
-//     };
-
-//     const newDoc = await setDoc(userRef, {
-//       ...newUser,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }

@@ -17,7 +17,6 @@
         <button @click="$router.back()" class="ml-4">Cancel</button>
       </template>
     </AddEditCounter>
-    <pre>{{ counterData.value }}</pre>
   </div>
 </template>
 
@@ -38,16 +37,4 @@ const handleEditCounter = () => {
   storeCounters.updateCounter(route.params.id, counterData.value);
   router.push('/app/home');
 };
-
-// watch([windowType, () => windowPrice.value], ([type, price]) => {
-//   if (type !== '' && price !== '') {
-//     storeCounters.isValid = true;
-//     storeCounters.isDisabled = false;
-//   }
-
-//   if ((type === '' && price === '') || price === '' || type === '') {
-//     storeCounters.isValid = false;
-//     storeCounters.isDisabled = true;
-//   }
-// });
 </script>

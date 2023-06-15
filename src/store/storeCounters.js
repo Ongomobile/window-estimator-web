@@ -28,15 +28,10 @@ export const useStoreCounters = defineStore('storeCounters', {
     };
   },
   actions: {
-    init() {
+    init(userId) {
       const storeAuth = useStoreAuth();
       // Initialize our database refs
-      countersCollectionRef = collection(
-        db,
-        'users',
-        storeAuth.user.id,
-        'counters'
-      );
+      countersCollectionRef = collection(db, 'users', userId, 'counters');
       countersCollectionQuery = query(
         countersCollectionRef,
         orderBy('date', 'desc')
@@ -99,36 +94,25 @@ export const useStoreCounters = defineStore('storeCounters', {
         };
     },
     async updateCounter(id, counter) {
-      console.log(id, counter);
-      console.log(countersCollectionRef);
-      // const docRef = (db, 'users', '46BolHpfMebEgGePd55dGERuaDr2', 'counters');
-      await updateDoc(doc(countersCollectionRef, id), {
-        location: counter.location,
-        price: counter.price,
-        type: counter.type,
-        url: counter.url,
-        date: counter.date,
-        quantity: counter.quantity,
-        subtotal: counter.subtotal,
-        alt: counter.alt,
-      });
-
-      // await updateDoc(
-      //   doc(docRef, id),
-      //   {
-      //     location: counter.location,
-      //     price: counter.price,
-      //     type: counter.type,
-      //     url: counter.url,
-      //     date: counter.date,
-      //     quantity: counter.quantity,
-      //     subtotal: counter.subtotal,
-      //     alt: counter.alt,
-      //   },
-      //   (error) => {
-      //     console.log('error.message', error.message);
-      //   }
-      // );
+      let newDate = new Date().getTime(),
+        date = newDate.toString();
+      await updateDoc(
+        doc(countersCollectionRef, id),
+        {
+          date,
+          location: counter.location,
+          price: counter.price,
+          type: counter.type,
+          url: counter.url,
+          date: counter.date,
+          quantity: counter.quantity,
+          subtotal: counter.subtotal,
+          alt: counter.type,
+        },
+        (error) => {
+          console.log('error.message', error.message);
+        }
+      );
     },
     clearCounters() {
       this.counters = [];

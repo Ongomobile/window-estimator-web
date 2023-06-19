@@ -1,5 +1,3 @@
-import { VueFire, VueFireAuth } from 'vuefire';
-import { firebaseApp } from '@/firebase.js';
 import 'animate.css';
 import 'flatpickr/dist/flatpickr.css';
 import 'simplebar/dist/simplebar.min.css';
@@ -27,13 +25,7 @@ pinia.use(({ store }) => {
   store.router = markRaw(router);
 });
 
-// vue use
 const app = createApp(App)
-  .use(VueFire, {
-    // imported above but could also just be created here
-    firebaseApp,
-    modules: [VueFireAuth()],
-  })
   .use(pinia)
   .use(VueSweetalert2)
   .use(Toast, {

@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 // import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 
 import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -26,5 +27,6 @@ const firebaseApp = initializeApp(firebaseConfig);
 // });
 
 const db = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp);
 
-export { db, firebaseApp };
+export { db, auth };

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { useFirebaseAuth } from 'vuefire';
+import { auth } from '@/firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -8,7 +8,7 @@ import {
 } from '@firebase/auth';
 import { useToast } from 'vue-toastification';
 import { useStoreCounters } from '@/store/storeCounters';
-const auth = useFirebaseAuth();
+// const auth = useFirebaseAuth();
 const toast = useToast();
 
 export const useStoreAuth = defineStore('storeAuth', {

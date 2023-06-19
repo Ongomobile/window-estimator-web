@@ -96,6 +96,7 @@ export const useStoreCounters = defineStore('storeCounters', {
     async updateCounter(id, counter) {
       let newDate = new Date().getTime(),
         date = newDate.toString();
+      console.log('counter', counter.quantity);
       await updateDoc(
         doc(countersCollectionRef, id),
         {
@@ -104,7 +105,6 @@ export const useStoreCounters = defineStore('storeCounters', {
           price: counter.price,
           type: counter.type,
           url: counter.url,
-          date: counter.date,
           quantity: counter.quantity,
           subtotal: counter.subtotal,
           alt: counter.type,
@@ -125,6 +125,9 @@ export const useStoreCounters = defineStore('storeCounters', {
     closeCounterModal() {
       this.addModal = false;
     },
+    openEditCounterModal() {
+      this.editModal = true;
+    },
     closeEditCounterModal() {
       this.editModal = false;
     },
@@ -132,7 +135,11 @@ export const useStoreCounters = defineStore('storeCounters', {
   getters: {
     getCounterContent: (state) => {
       return (id) => {
-        return state.counters.filter((counter) => counter.id === id)[0];
+        let counterData = state.counters.filter(
+          (counter) => counter.id === id
+        )[0];
+
+        return counterData;
       };
     },
   },

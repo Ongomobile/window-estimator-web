@@ -1,10 +1,10 @@
 <template>
   <div class="max-w-sm">
     <AddEditCounter
-      v-model:windowType="counterData.type"
-      v-model:windowLocation="counterData.location"
-      v-model:windowPrice="counterData.price"
-      v-model:imageUrl="counterData.url"
+      v-model:windowType="editedData.type"
+      v-model:windowLocation="editedData.location"
+      v-model:windowPrice="editedData.price"
+      v-model:imageUrl="editedData.url"
       :validated="(storeCounters.isValid = true)"
     >
       <template #buttons>
@@ -30,11 +30,11 @@ const storeCounters = useStoreCounters();
 const route = useRoute();
 const router = useRouter();
 
-const counterData = ref({});
-counterData.value = storeCounters.getCounterContent(route.params.id);
+let editedData = ref({});
+editedData.value = storeCounters.getCounterContent(route.params.id);
 
 const handleEditCounter = () => {
-  storeCounters.updateCounter(route.params.id, counterData.value);
+  storeCounters.updateCounter(route.params.id, editedData.value);
   router.push('/app/home');
 };
 </script>

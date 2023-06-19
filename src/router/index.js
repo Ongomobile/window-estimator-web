@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { getCurrentUser } from 'vuefire';
-
+import { useStoreAuth } from '@/store/storeAuth';
 import routes from './route';
 
 const router = createRouter({
@@ -18,7 +17,9 @@ const router = createRouter({
 
 async function authGuard(to) {
   // Ensures the user is initialized
-  const user = await getCurrentUser();
+  const storeAuth = useStoreAuth();
+  const user = storeAuth.user;
+
   if (to.meta.isProtected && !user) {
     // Redirect to a login page
     return '/';

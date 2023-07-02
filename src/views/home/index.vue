@@ -16,7 +16,7 @@
       <draggable
         v-model="storeCounters.counters"
         :animation="200"
-        :itemKey="id"
+        item-key="id"
         class="p-3 flex flex-col list-none overflow-auto overflow-y-scroll"
       >
         <template #item="{ element }">

@@ -84,7 +84,7 @@ export const useStoreCounters = defineStore('storeCounters', {
     async updateCounter(id, counter) {
       let newDate = new Date().getTime(),
         date = newDate.toString();
-      console.log('counter', counter);
+      console.log('counter passed to updateDoc', counter);
       await updateDoc(
         doc(countersCollectionRef, id),
         {
@@ -124,7 +124,6 @@ export const useStoreCounters = defineStore('storeCounters', {
     getCounterContent: (state) => {
       return (id) => {
         let counterData = state.counters.filter((counter) => counter.id === id)[0];
-
         return counterData;
       };
     },

@@ -1,14 +1,5 @@
 import { defineStore } from 'pinia';
-import {
-  addDoc,
-  collection,
-  onSnapshot,
-  doc,
-  deleteDoc,
-  updateDoc,
-  query,
-  orderBy,
-} from 'firebase/firestore';
+import { addDoc, collection, onSnapshot, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore';
 import { useStoreAuth } from '@/store/storeAuth';
 import { db } from '@/firebase';
 let countersCollectionRef;
@@ -32,10 +23,7 @@ export const useStoreCounters = defineStore('storeCounters', {
       const storeAuth = useStoreAuth();
       // Initialize our database refs
       countersCollectionRef = collection(db, 'users', userId, 'counters');
-      countersCollectionQuery = query(
-        countersCollectionRef,
-        orderBy('date', 'desc')
-      );
+      countersCollectionQuery = query(countersCollectionRef, orderBy('date', 'desc'));
 
       this.getCounters();
     },
@@ -96,7 +84,7 @@ export const useStoreCounters = defineStore('storeCounters', {
     async updateCounter(id, counter) {
       let newDate = new Date().getTime(),
         date = newDate.toString();
-      console.log('counter', counter.quantity);
+      console.log('counter', counter);
       await updateDoc(
         doc(countersCollectionRef, id),
         {
@@ -135,9 +123,7 @@ export const useStoreCounters = defineStore('storeCounters', {
   getters: {
     getCounterContent: (state) => {
       return (id) => {
-        let counterData = state.counters.filter(
-          (counter) => counter.id === id
-        )[0];
+        let counterData = state.counters.filter((counter) => counter.id === id)[0];
 
         return counterData;
       };

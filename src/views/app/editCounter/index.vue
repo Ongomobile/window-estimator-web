@@ -14,7 +14,12 @@
         >
           Edit Counter
         </button>
-        <button @click="$router.back()" class="ml-4">Cancel</button>
+        <button
+          @click="$router.push('/app/home')"
+          class="ml-4"
+        >
+          Cancel
+        </button>
       </template>
     </AddEditCounter>
   </div>

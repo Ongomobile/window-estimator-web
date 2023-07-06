@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Button from '@/components/Button';
 import AddCounter from '@/components/Counters/AddCounter';
 import { useStoreCounters } from '@/store/storeCounters';

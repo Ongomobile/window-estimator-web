@@ -64,12 +64,8 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import { useStoreCounters } from '@/store/storeCounters';
 import SelectImage from '@/components/Counters/SelectImage.vue';
 import windowData from './windowData';
-
-const storeCounters = useStoreCounters();
 
 const props = defineProps({
   windowType: {

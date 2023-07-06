@@ -82,12 +82,10 @@ export const useStoreCounters = defineStore('storeCounters', {
         };
     },
     async updateCounter(id, counter) {
-      let newDate = new Date().getTime(),
-        date = newDate.toString();
-      console.log('counter passed to updateDoc', counter);
-      await updateDoc(
-        doc(countersCollectionRef, id),
-        {
+      try {
+        let newDate = new Date().getTime(),
+          date = newDate.toString();
+        const payload = {
           date,
           location: counter.location,
           price: counter.price,
@@ -96,11 +94,12 @@ export const useStoreCounters = defineStore('storeCounters', {
           quantity: counter.quantity,
           subtotal: counter.subtotal,
           alt: counter.type,
-        },
-        (error) => {
-          console.log('error.message', error.message);
-        }
-      );
+        };
+        await updateDoc(doc(countersCollectionRef, id), payload);
+      } catch (error) {
+        console.log('ERRRRORR!!!');
+        console.error(error);
+      }
     },
     clearCounters() {
       this.counters = [];

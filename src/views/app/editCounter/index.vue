@@ -9,12 +9,14 @@
     >
       <template #buttons>
         <button
+          type="button"
           @click="handleEditCounter"
           class="bg-slate-900 dark:bg-slate-800 dark:border-b dark:border-slate-700 text-white uppercase p-2 rounded-md"
         >
           Edit Counter
         </button>
         <button
+          type="button"
           @click="$router.push('/app/home')"
           class="ml-4"
         >
@@ -26,7 +28,7 @@
 </template>
 
 <script setup>
-import { watch, ref } from 'vue';
+import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import AddEditCounter from '@/components/Counters/AddEditCounter';
 import { useStoreCounters } from '@/store/storeCounters';

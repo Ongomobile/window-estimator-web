@@ -46,6 +46,16 @@
         class="add-counter-input"
         placeholder="Add Window Price"
       />
+      <input
+        :value="windowQuantity"
+        @input="$emit('update:windowQuantity', Number($event.target.value))"
+        type="number"
+        step="any"
+        id="quantity"
+        name="quantity"
+        class="add-counter-input"
+        placeholder="Quantity"
+      />
       <SelectImage
         :images="windowData"
         @on-select-image="selectImage"
@@ -80,6 +90,9 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  windowQuantity: {
+    type: Number,
+  },
   imageUrl: {
     type: String,
   },
@@ -92,6 +105,7 @@ const emit = defineEmits([
   'update:windowType',
   'update:windowLocation',
   'update:windowPrice',
+  'update:windowQuantity',
   'update:imageUrl',
   'update:validated',
 ]);

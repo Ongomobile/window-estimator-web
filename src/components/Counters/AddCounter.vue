@@ -14,6 +14,7 @@
     >
       <template #buttons>
         <button
+          type="button"
           @click="handleAddCounter"
           :disabled="storeCounters.isDisabled"
           :class="storeCounters.isDisabled ? 'opacity-10' : ''"

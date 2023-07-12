@@ -7,12 +7,10 @@
         btnClass="btn-dark w-full block  "
         @click="openAddModal"
       />
+      <Totals />
     </div>
     <AddCounter />
     <div class="flex flex-col max-w-sm items-center">
-      <div class="flex p-5 rounded-lg bg-white min-w-[318px] mt-8">
-        <p class="total-text">Total Price {{ getTotals }}</p>
-      </div>
       <draggable
         v-model="storeCounters.counters"
         :animation="200"
@@ -34,6 +32,7 @@
 import { ref } from 'vue';
 import Button from '@/components/Button';
 import AddCounter from '@/components/Counters/AddCounter';
+import Totals from '@/components/Counters/Totals';
 import { useStoreCounters } from '@/store/storeCounters';
 import Counter from '@/components/Counters/Counter.vue';
 import draggable from 'vuedraggable';

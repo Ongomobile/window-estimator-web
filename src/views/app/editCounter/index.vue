@@ -4,6 +4,7 @@
       v-model:windowType="editedData.type"
       v-model:windowLocation="editedData.location"
       v-model:windowPrice="editedData.price"
+      v-model:windowQuantity="editedData.quantity"
       v-model:imageUrl="editedData.url"
       :validated="(storeCounters.isValid = true)"
     >

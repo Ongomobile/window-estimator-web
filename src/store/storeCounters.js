@@ -123,6 +123,7 @@ export const useStoreCounters = defineStore('storeCounters', {
     getCounterContent: (state) => {
       return (id) => {
         let counterData = state.counters.filter((counter) => counter.id === id)[0];
+
         return counterData;
       };
     },

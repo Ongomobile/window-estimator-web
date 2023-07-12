@@ -6,7 +6,11 @@
     </div>
     <div class="counter-controls-wrapper">
       <div class="counter-image-wrapper">
-        <img :src="counter.url" :alt="counter.alt" class="counter-image" />
+        <img
+          :src="counter.url"
+          :alt="counter.alt"
+          class="counter-image"
+        />
       </div>
       <div class="counter-tally-wrapper">
         <input
@@ -48,8 +52,17 @@
         </svg>
       </span>
       <label class="counter-subtotal-label">Subtotal</label>
-      <span id="" class="counter-subtotal-display">{{ counter.subtotal }}</span>
-      <p class="reset-btn" @click="resetSubtotal(counter)">reset</p>
+      <span
+        id=""
+        class="counter-subtotal-display"
+        >{{ counter.subtotal }}</span
+      >
+      <p
+        class="reset-btn"
+        @click="resetSubtotal(counter)"
+      >
+        reset
+      </p>
       <RouterLink
         :to="`/app/editCounter/${counter.id}`"
         class="card-footer-item"
@@ -67,7 +80,10 @@
             xml:space="preserve"
             stroke="#475569"
           >
-            <g id="SVGRepo_bgCarrier" stroke-width="0" />
+            <g
+              id="SVGRepo_bgCarrier"
+              stroke-width="0"
+            />
 
             <g
               id="SVGRepo_tracerCarrier"
@@ -95,6 +111,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useStoreCounters } from '@/store/storeCounters';
 import { useSound } from '@vueuse/sound';
 import plusSound from '@/assets/sounds/click-sound.mp3';
@@ -103,6 +120,7 @@ import minusSound from '@/assets/sounds/minus-click.mp3';
 const plus = useSound(plusSound);
 const minus = useSound(minusSound);
 const storeCounters = useStoreCounters();
+const qty = ref(0);
 
 const props = defineProps({
   counter: {
@@ -239,6 +257,7 @@ const resetSubtotal = (counter) => {
 .counter-qty-span {
   font-size: 20px;
   font-weight: 500;
+  width: 60px;
 }
 .reset-btn {
   color: #0e6d97;
